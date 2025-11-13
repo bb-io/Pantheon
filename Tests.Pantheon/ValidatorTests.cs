@@ -2,7 +2,7 @@ using Tests.Pantheon.Base;
 using Apps.Pantheon.Connections;
 using Blackbird.Applications.Sdk.Common.Authentication;
 
-namespace Tests.Appname;
+namespace Tests.Pantheon;
 
 [TestClass]
 public class ConnectionValidatorTests : TestBase
