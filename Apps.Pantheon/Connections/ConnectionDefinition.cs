@@ -1,8 +1,8 @@
-﻿using Apps.Appname.Constants;
-using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.Pantheon.Constants;
 using Blackbird.Applications.Sdk.Common.Connections;
+using Blackbird.Applications.Sdk.Common.Authentication;
 
-namespace Apps.Appname.Connections;
+namespace Apps.Pantheon.Connections;
 
 public class ConnectionDefinition : IConnectionDefinition
 {

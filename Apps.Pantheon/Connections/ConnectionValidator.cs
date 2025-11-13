@@ -1,9 +1,9 @@
-﻿using Apps.Appname.Api;
+﻿using RestSharp;
+using Apps.Pantheon.Api;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
-using RestSharp;
 
-namespace Apps.Appname.Connections;
+namespace Apps.Pantheon.Connections;
 
 public class ConnectionValidator: IConnectionValidator
 {
@@ -13,7 +13,7 @@ public class ConnectionValidator: IConnectionValidator
     {
         try
         {
-            var client = new Client(authenticationCredentialsProviders);
+            var client = new PantheonClient(authenticationCredentialsProviders);
 
             await client.ExecuteWithErrorHandling(new RestRequest());
 

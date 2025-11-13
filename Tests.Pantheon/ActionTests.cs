@@ -1,7 +1,7 @@
-﻿using Apps.Appname.Actions;
-using Tests.Appname.Base;
+﻿using Tests.Pantheon.Base;
+using Apps.Pantheon.Actions;
 
-namespace Tests.Appname;
+namespace Tests.Pantheon;
 
 [TestClass]
 public class ActionTests : TestBase

@@ -1,8 +1,8 @@
-﻿using Apps.Appname.Handlers;
+﻿using Tests.Pantheon.Base;
+using Apps.Pantheon.Handlers;
 using Blackbird.Applications.Sdk.Common.Dynamic;
-using Tests.Appname.Base;
 
-namespace Tests.Appname;
+namespace Tests.Pantheon;
 
 [TestClass]
 public class HandlerTests : TestBase

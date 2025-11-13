@@ -1,6 +1,6 @@
-using Apps.Appname.Connections;
+using Tests.Pantheon.Base;
+using Apps.Pantheon.Connections;
 using Blackbird.Applications.Sdk.Common.Authentication;
-using Tests.Appname.Base;
 
 namespace Tests.Appname;
 
