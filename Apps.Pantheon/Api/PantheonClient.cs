@@ -12,10 +12,10 @@ public class PantheonClient : BlackBirdRestClient
 {
     public PantheonClient(IEnumerable<AuthenticationCredentialsProvider> creds) : base(new()
     {
-        BaseUrl = new Uri(""),
+        BaseUrl = new Uri("https://hypnos-client-api.welocalize.io/v1/client-api/"),
     })
     {
-        this.AddDefaultHeader("Authorization", creds.Get(CredsNames.AuthKey).Value);
+        this.AddDefaultHeader("x-pantheon-auth-key", creds.Get(CredsNames.AuthKey).Value);
     }
 
     protected override Exception ConfigureErrorException(RestResponse response)

@@ -1,7 +1,7 @@
 ﻿using RestSharp;
 using Apps.Pantheon.Api;
-using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
+using Blackbird.Applications.Sdk.Common.Authentication;
 
 namespace Apps.Pantheon.Connections;
 
@@ -14,14 +14,13 @@ public class ConnectionValidator: IConnectionValidator
         try
         {
             var client = new PantheonClient(authenticationCredentialsProviders);
+            var request = new RestRequest("projects", Method.Get);
 
-            await client.ExecuteWithErrorHandling(new RestRequest());
+            await client.ExecuteWithErrorHandling(request);
 
-            return new()
-            {
-                IsValid = true
-            };
-        } catch(Exception ex)
+            return new() { IsValid = true };
+        } 
+        catch(Exception ex)
         {
             return new()
             {
