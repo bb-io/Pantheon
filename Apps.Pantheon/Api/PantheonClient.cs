@@ -15,7 +15,7 @@ public class PantheonClient : BlackBirdRestClient
         BaseUrl = new Uri(""),
     })
     {
-        this.AddDefaultHeader("Authorization", creds.Get(CredsNames.Token).Value);
+        this.AddDefaultHeader("Authorization", creds.Get(CredsNames.AuthKey).Value);
     }
 
     protected override Exception ConfigureErrorException(RestResponse response)
