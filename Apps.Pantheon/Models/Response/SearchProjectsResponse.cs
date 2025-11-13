@@ -2,4 +2,4 @@
 
 namespace Apps.Pantheon.Models.Response;
 
-public record SearchProjectsResponse(List<ProjectEntity> Data, object Meta);
+public record SearchProjectsResponse(List<ProjectEntity> Data);
