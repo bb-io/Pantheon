@@ -10,11 +10,11 @@ public class ConnectionDefinition : IConnectionDefinition
     {
         new()
         {
-            Name = "Authorization key",
+            Name = "Authentication key",
             AuthenticationType = ConnectionAuthenticationType.Undefined,
             ConnectionProperties = new List<ConnectionProperty>
             {
-                new(CredsNames.AuthKey) { DisplayName = "Authorization key", Sensitive = true}
+                new(CredsNames.AuthKey) { DisplayName = "Authentication key", Sensitive = true }
             }
         }
     };
