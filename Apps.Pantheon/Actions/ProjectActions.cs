@@ -39,7 +39,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
             projectReferenceId = input.ProjectReferenceId,
             name = input.Name,
             dueDate = input.DueDate,
-            languages = new[] { new { source = input.SourceLanguage, target = input.TargetLanguage } },
+            languages = input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray(),
             services = input.Services.Select(x => new { id = x }).ToArray()
         };
 

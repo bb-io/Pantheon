@@ -44,11 +44,11 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "123",
+			ProjectReferenceId = "abba",
 			Name = "Test from tests",
 			Services = ["13"],
 			SourceLanguage = "en",
-			TargetLanguage = "uk-UA"
+			TargetLanguages = ["uk-UA", "de-CH"]
 		};
 
 		// Act

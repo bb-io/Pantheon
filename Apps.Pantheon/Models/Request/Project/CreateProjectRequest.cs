@@ -23,7 +23,7 @@ public class CreateProjectRequest
 
     [Display("Target language")]
     [StaticDataSource(typeof(LanguageDataHandler))]
-    public string TargetLanguage { get; set; }
+    public List<string> TargetLanguages { get; set; }
 
     [Display("Services")]
     [DataSource(typeof(ServiceDataHandler))]
