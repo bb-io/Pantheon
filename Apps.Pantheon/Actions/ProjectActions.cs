@@ -22,7 +22,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
         return await Client.ExecuteWithErrorHandling<SearchProjectsResponse>(request);
     }
 
-    [Action("Get project status", Description = "Get status for a specified project")]
+    [Action("Get project status", Description = "Get status for a specific project")]
     public async Task<GetProjectStatusResponse> GetProjectStatus([ActionParameter] ProjectIdentifier input)
     {
         var request = new RestRequest($"project/{input.ProjectId}/status", Method.Get);
