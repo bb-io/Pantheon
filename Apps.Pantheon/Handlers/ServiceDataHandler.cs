@@ -10,7 +10,7 @@ public class ServiceDataHandler(InvocationContext invocationContext) : PantheonI
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)
     {
         var request = new RestRequest("services", Method.Get);
-        var response = await Client.ExecuteWithErrorHandling<ListServicesResponse>(request);
+        var response = await Client.ExecuteWithErrorHandling<SearchServicesResponse>(request);
 
         return response.Data.Select(s => new DataSourceItem(s.Id, s.Name));
     }

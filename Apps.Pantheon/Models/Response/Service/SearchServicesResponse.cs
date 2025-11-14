@@ -2,4 +2,4 @@
 
 namespace Apps.Pantheon.Models.Response.Service;
 
-public record ListServicesResponse(List<ServiceEntity> Data);
+public record SearchServicesResponse(List<ServiceEntity> Data);
