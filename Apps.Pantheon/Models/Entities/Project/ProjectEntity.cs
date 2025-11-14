@@ -15,9 +15,9 @@ public class ProjectEntity
 
     [JsonProperty("languages")]
     [Display("Languages")]
-    public ProjectLanguagesEntity Languages { get; set; }
+    public List<ProjectLanguagesEntity> Languages { get; set; }
 
     [JsonProperty("dueDate")]
     [Display("Due date")]
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
 }
