@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 
 namespace Apps.Pantheon.Handlers;
 
-public class ProjectDataHandler(InvocationContext context) : Invocable(context), IAsyncDataSourceItemHandler
+public class ProjectDataHandler(InvocationContext context) : PantheonInvocable(context), IAsyncDataSourceItemHandler
 {
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken token)
     {

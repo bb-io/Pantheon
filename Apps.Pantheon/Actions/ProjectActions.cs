@@ -11,7 +11,7 @@ using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 namespace Apps.Pantheon.Actions;
 
 [ActionList("Projects")]
-public class ProjectActions(InvocationContext invocationContext) : Invocable(invocationContext)
+public class ProjectActions(InvocationContext invocationContext) : PantheonInvocable(invocationContext)
 {
     [Action("Search projects", Description = "Search all projects")]
     public async Task<SearchProjectsResponse> SearchProjects()

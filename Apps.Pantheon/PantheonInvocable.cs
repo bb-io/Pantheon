@@ -5,13 +5,13 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 
 namespace Apps.Pantheon;
 
-public class Invocable : BaseInvocable
+public class PantheonInvocable : BaseInvocable
 {
     protected AuthenticationCredentialsProvider[] Creds =>
         InvocationContext.AuthenticationCredentialsProviders.ToArray();
 
     protected PantheonClient Client { get; }
-    public Invocable(InvocationContext invocationContext) : base(invocationContext)
+    public PantheonInvocable(InvocationContext invocationContext) : base(invocationContext)
     {
         Client = new(Creds);
     }
