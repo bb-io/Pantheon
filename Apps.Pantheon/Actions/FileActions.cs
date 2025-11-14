@@ -7,6 +7,7 @@ using Apps.Pantheon.Models.Request.File;
 using Apps.Pantheon.Models.Response.File;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 
@@ -21,7 +22,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         [ActionParameter] ProjectIdentifier project, 
         [ActionParameter] UploadFileRequest input)
     {
-        var request = new RestRequest($"project/{project.ProjectId}/file", Method.Post);
+        var request = new RestRequest($"project/{project.Id}/file", Method.Post);
 
         var fileStream = await fileManagementClient.DownloadAsync(input.File); 
         using var ms = new MemoryStream();
@@ -50,7 +51,19 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         // https://hypnos-client-api.welocalize.io/docs/client-api.html#operation/clientApiGetDeliverableList
         // to define whether file is ready to be delivered or not.
 
-        var request = new RestRequest($"project/{project.ProjectId}/files", Method.Get);
+        var request = new RestRequest($"project/{project.Id}/files", Method.Get);
         return await Client.ExecuteWithErrorHandling<SearchFilesResponse>(request);
+    }
+
+    [Action("Delete file", Description = "Delete a specific file from a project")]
+    public async Task DeleteFile([ActionParameter] ProjectIdentifier project, [ActionParameter] FileIdentifier fileId)
+    {
+        var request = new RestRequest($"project/{project.Id}/file/{fileId.Id}", Method.Delete);
+        var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
+
+        if (result.Data != "Success file deleted")
+            throw new PluginApplicationException(
+                $"Failed to delete file {fileId.Id} from the project {project.Id}: {result.Data}"
+            );
     }
 }

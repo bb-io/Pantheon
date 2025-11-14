@@ -27,7 +27,7 @@ public class ProjectActionTests : TestBase
     {
         // Arrange
         var action = new ProjectActions(InvocationContext);
-		var request = new ProjectIdentifier { ProjectId = "3378249983" };
+		var request = new ProjectIdentifier { Id = "3378249983" };
 
         // Act
         var result = await action.GetProjectStatus(request);
@@ -44,11 +44,11 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "abba",
+			ProjectReferenceId = "abba123",
 			Name = "Test from tests",
 			Services = ["13"],
-			SourceLanguage = "en",
-			TargetLanguages = ["uk-UA", "de-CH"]
+			SourceLanguage = "en-US",
+			TargetLanguages = ["uk-UA"]
 		};
 
 		// Act
@@ -64,7 +64,7 @@ public class ProjectActionTests : TestBase
 	{
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
-		var input = new ProjectIdentifier { ProjectId = "3378249995" };
+		var input = new ProjectIdentifier { Id = "3378249995" };
 
 		// Act
 		await action.StartProject(input);

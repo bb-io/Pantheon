@@ -4,9 +4,9 @@ using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Pantheon.Models.Identifiers;
 
-public class ProjectIdentifier
+public class FileIdentifier
 {
-    [Display("Project ID")]
-    [DataSource(typeof(ProjectDataHandler))]
+    [Display("File ID")]
+    [DataSource(typeof(FileDataHandler))]
     public string Id { get; set; }
 }

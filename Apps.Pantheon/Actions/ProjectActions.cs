@@ -25,7 +25,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     [Action("Get project status", Description = "Get status for a specific project")]
     public async Task<GetProjectStatusResponse> GetProjectStatus([ActionParameter] ProjectIdentifier input)
     {
-        var request = new RestRequest($"project/{input.ProjectId}/status", Method.Get);
+        var request = new RestRequest($"project/{input.Id}/status", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<GetProjectStatusResponse>>(request);
         return result.Data;
     }
@@ -52,10 +52,10 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     [Action("Start project", Description = "Start a project with a specific ID")]
     public async Task StartProject([ActionParameter] ProjectIdentifier input)
     {
-        var request = new RestRequest($"project/{input.ProjectId}/start", Method.Put);
+        var request = new RestRequest($"project/{input.Id}/start", Method.Put);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
 
         if (result.Data != "Project started successfully")
-            throw new PluginApplicationException($"Failed to start project {input.ProjectId}: {result.Data}");
+            throw new PluginApplicationException($"Failed to start project {input.Id}: {result.Data}");
     }
 }

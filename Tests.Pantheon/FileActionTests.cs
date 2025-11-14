@@ -14,14 +14,14 @@ public class FileActionTests : TestBase
     {
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { ProjectId = "3378249995" };
+		var project = new ProjectIdentifier { Id = "3378249998" };
 		var file = new FileReference { Name = "file1.html" };
 		var request = new UploadFileRequest 
 		{ 
 			File = file, 
-			FileType = "reference", 
-			SourceLanguage = "en-US", 
-			TargetLanguage = "sv-SE"  
+			FileType = "work", 
+			SourceLanguage = "en-US",
+			TargetLanguage = "uk-UA"
 		};
 
         // Act
@@ -37,7 +37,7 @@ public class FileActionTests : TestBase
 	{
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { ProjectId = "3378249995" };
+		var project = new ProjectIdentifier { Id = "3378249995" };
 
 		// Act
 		var result = await action.SearchFiles(project);
@@ -45,5 +45,17 @@ public class FileActionTests : TestBase
         // Assert
         PrintJsonResult(result);
         Assert.IsNotNull(result);
+    }
+
+	[TestMethod]
+	public async Task DeleteFile_IsSuccess()
+	{
+		// Arrange
+		var action = new FileActions(InvocationContext, FileManager);
+		var project = new ProjectIdentifier { Id = "3378249995" };
+		var fileId = new FileIdentifier { Id = "1708922" };
+
+		// Act
+		await action.DeleteFile(project, fileId);
     }
 }
