@@ -22,6 +22,21 @@ public class ProjectActionTests : TestBase
 	}
 
 	[TestMethod]
+	public async Task GetProjectStatus_ReturnsProjectStatus()
+    {
+        // Arrange
+        var action = new ProjectActions(InvocationContext);
+		var request = new GetProjectStatusRequest { ProjectId = "3378249993" };
+
+        // Act
+        var result = await action.GetProjectStatus(request);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+	[TestMethod]
 	public async Task CreateProject_ReturnsProjectId()
 	{
 		// Arrange
