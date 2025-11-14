@@ -1,11 +1,13 @@
 using RestSharp;
 using Apps.Pantheon.Constants;
 using Apps.Pantheon.Models.Response;
+using Apps.Pantheon.Models.Identifiers;
 using Apps.Pantheon.Models.Request.Project;
 using Apps.Pantheon.Models.Response.Project;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 
 namespace Apps.Pantheon.Actions;
@@ -21,7 +23,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     }
 
     [Action("Get project status", Description = "Get status for a specified project")]
-    public async Task<GetProjectStatusResponse> GetProjectStatus([ActionParameter] GetProjectStatusRequest input)
+    public async Task<GetProjectStatusResponse> GetProjectStatus([ActionParameter] ProjectIdentifier input)
     {
         var request = new RestRequest($"project/{input.ProjectId}/status", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<GetProjectStatusResponse>>(request);
@@ -45,5 +47,15 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
 
         var result = await Client.ExecuteWithErrorHandling<DataResponse<CreateProjectResponse>>(request); 
         return result.Data;
+    }
+
+    [Action("Start project", Description = "Start a project with a specific ID")]
+    public async Task StartProject([ActionParameter] ProjectIdentifier input)
+    {
+        var request = new RestRequest($"project/{input.ProjectId}/start", Method.Put);
+        var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
+
+        if (result.Data != "Project started successfully")
+            throw new PluginApplicationException($"Failed to start project {input.ProjectId}: {result.Data}");
     }
 }

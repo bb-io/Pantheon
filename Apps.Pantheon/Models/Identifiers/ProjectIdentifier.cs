@@ -2,9 +2,9 @@
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 
-namespace Apps.Pantheon.Models.Request.Project;
+namespace Apps.Pantheon.Models.Identifiers;
 
-public class GetProjectStatusRequest
+public class ProjectIdentifier
 {
     [Display("Project ID")]
     [DataSource(typeof(ProjectDataHandler))]

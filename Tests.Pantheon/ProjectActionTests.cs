@@ -1,6 +1,7 @@
 ﻿using Tests.Pantheon.Base;
 using Apps.Pantheon.Actions;
 using Apps.Pantheon.Models.Request.Project;
+using Apps.Pantheon.Models.Identifiers;
 
 namespace Tests.Pantheon;
 
@@ -26,7 +27,7 @@ public class ProjectActionTests : TestBase
     {
         // Arrange
         var action = new ProjectActions(InvocationContext);
-		var request = new GetProjectStatusRequest { ProjectId = "3378249993" };
+		var request = new ProjectIdentifier { ProjectId = "3378249983" };
 
         // Act
         var result = await action.GetProjectStatus(request);
@@ -56,5 +57,16 @@ public class ProjectActionTests : TestBase
 		// Assert
 		PrintJsonResult(result);
 		Assert.IsNotNull(result);
+	}
+
+	[TestMethod]
+	public async Task StartProject_IsSuccess()
+	{
+		// Arrange
+		var action = new ProjectActions(InvocationContext);
+		var input = new ProjectIdentifier { ProjectId = "3378249983" };
+
+		// Act
+		await action.StartProject(input);
 	}
 }
