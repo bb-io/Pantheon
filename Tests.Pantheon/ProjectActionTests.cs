@@ -10,25 +10,66 @@ namespace Tests.Pantheon;
 public class ProjectActionTests : TestBase
 {
     [TestMethod]
-    public async Task SearchProjects_ReturnsProjects()
+    public async Task SearchProjects_WithoutFilters_ReturnsProjects()
     {
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
+		var request = new SearchProjectsRequest();
 
 		// Act
-		var result = await action.SearchProjects();
+		var result = await action.SearchProjects(request);
 
 		// Assert
 		PrintJsonResult(result);
 		Assert.IsNotNull(result);
-	}
+    }
 
-	[TestMethod]
+    [TestMethod]
+    public async Task SearchProjects_WithFilters_ReturnsProjects()
+    {
+        // Arrange
+        var action = new ProjectActions(InvocationContext);
+        var request = new SearchProjectsRequest 
+		{
+            Statuses = ["created"],
+			DueDateBefore = DateTime.Now + TimeSpan.FromDays(1),
+			DueDateAfter = DateTime.Now + TimeSpan.FromDays(5),
+		};
+
+        // Act
+        var result = await action.SearchProjects(request);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task SearchProjects_IncorrectDateRange_ThrowsMisconfigException()
+    {
+        // Arrange
+        var action = new ProjectActions(InvocationContext);
+        var request = new SearchProjectsRequest
+        {
+            DueDateBefore = DateTime.Now + TimeSpan.FromDays(4),
+            DueDateAfter = DateTime.Now + TimeSpan.FromDays(1),
+        };
+
+        // Act
+        var ex = await Assert.ThrowsExactlyAsync<PluginMisconfigurationException>(async () => 
+            await action.SearchProjects(request)
+        );
+
+        // Assert
+        Assert.Contains("Invalid date range", ex.Message);
+    }
+
+    [TestMethod]
 	public async Task GetProjectStatus_ReturnsProjectStatus()
     {
         // Arrange
         var action = new ProjectActions(InvocationContext);
-		var request = new ProjectIdentifier { Id = "3378249983" };
+		var request = new ProjectIdentifier { Id = "3378250003" };
 
         // Act
         var result = await action.GetProjectStatus(request);
@@ -45,11 +86,12 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "hello",
+			ProjectReferenceId = "hello4",
 			Name = "Test from tests",
 			Services = ["13"],
 			SourceLanguage = "en-US",
-			TargetLanguages = ["uk-UA"]
+			TargetLanguages = ["uk-UA"],
+			DueDate = DateTime.Now + TimeSpan.FromDays(5),
 		};
 
 		// Act
@@ -65,7 +107,7 @@ public class ProjectActionTests : TestBase
 	{
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
-		var input = new ProjectIdentifier { Id = "3378250001" };
+		var input = new ProjectIdentifier { Id = "3378250003" };
 
 		// Act
 		await action.StartProject(input);

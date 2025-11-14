@@ -1,10 +1,12 @@
 using RestSharp;
+using Apps.Pantheon.Helper;
 using Apps.Pantheon.Constants;
 using Apps.Pantheon.Models.Response;
-using Apps.Pantheon.Models.Identifiers;
-using Apps.Pantheon.Models.Request.Project;
 using Apps.Pantheon.Models.Response.File;
 using Apps.Pantheon.Models.Response.Project;
+using Apps.Pantheon.Models.Request.Project;
+using Apps.Pantheon.Models.Identifiers;
+using Apps.Pantheon.Models.Entities.Project;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -17,10 +19,20 @@ namespace Apps.Pantheon.Actions;
 public class ProjectActions(InvocationContext invocationContext) : PantheonInvocable(invocationContext)
 {
     [Action("Search projects", Description = "Search all projects")]
-    public async Task<SearchProjectsResponse> SearchProjects()
+    public async Task<SearchProjectsResponse> SearchProjects([ActionParameter] SearchProjectsRequest input)
     {
+        ValidatorHelper.ValidateDateRange(input.DueDateBefore, input.DueDateAfter);
+
         var request = new RestRequest("projects", Method.Get);
-        return await Client.ExecuteWithErrorHandling<SearchProjectsResponse>(request);
+        var result = await Client.ExecuteWithErrorHandling<DataResponse<IEnumerable<ProjectEntity>>>(request);
+
+        var projects = result.Data
+            .FilterByDateBefore(input.DueDateBefore, p => p.DueDate)
+            .FilterByDateAfter(input.DueDateAfter, p => p.DueDate)
+            .FilterByStringArray(input.Statuses, p => p.Status)
+            .ToList();
+
+        return new(projects);
     }
 
     [Action("Get project status", Description = "Get status for a specific project")]
