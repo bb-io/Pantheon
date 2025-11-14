@@ -44,6 +44,19 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         return result.Data;
     }
 
+    // TO BE TESTED
+    // We need to wait for a file to process and appear as a deliverable
+    [Action("Download target file", Description = "Download a file for a target locale from a specific project")]
+    public async Task<DownloadTargetFileResponse> DownloadTargetFile(
+        [ActionParameter] ProjectIdentifier projectId,
+        [ActionParameter] DownloadTargetFileRequest input)
+    {
+        var request = new RestRequest($"project/{projectId.Id}/deliverable/{input.DeliverableId}", Method.Get);
+        return await Client.ExecuteWithErrorHandling<DownloadTargetFileResponse>(request);
+    }
+
+    // TO BE TESTED
+    // We need to wait for a file to process and appear as a deliverable
     [Action("Search files", Description = "Get a list of files for a specific project")]
     public async Task<SearchFilesResponse> SearchFiles([ActionParameter] ProjectIdentifier project)
     {

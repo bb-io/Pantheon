@@ -1,7 +1,7 @@
 ﻿using Tests.Pantheon.Base;
 using Apps.Pantheon.Handlers;
-using Blackbird.Applications.Sdk.Common.Dynamic;
 using Apps.Pantheon.Models.Identifiers;
+using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Tests.Pantheon;
 
@@ -37,7 +37,7 @@ public class DataHandlerTests : TestBase
     }
 
     [TestMethod]
-    public async Task FileDataHandler_ReturnsProjectIds()
+    public async Task FileDataHandler_ReturnsFileIds()
     {
         // Arrange
         var project = new ProjectIdentifier { Id = "3378249995" };
@@ -49,5 +49,20 @@ public class DataHandlerTests : TestBase
         // Assert
         PrintDataHandlerJsonResult(result);
         Assert.IsGreaterThan(0, result.Count());
+    }
+
+    [TestMethod]
+    public async Task DeliverableFileDataHandler_ReturnsDeliverableFileIds()
+    {
+        // Arrange
+        var project = new ProjectIdentifier { Id = "3378249998" };
+        var handler = new DeliverableFileDataHandler(project, InvocationContext);
+
+        // Act
+        var result = await handler.GetDataAsync(new DataSourceContext { }, CancellationToken.None);
+
+        // Assert
+        PrintDataHandlerJsonResult(result);
+        Assert.IsNotNull(result);
     }
 }

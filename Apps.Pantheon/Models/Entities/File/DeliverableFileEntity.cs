@@ -1,0 +1,27 @@
+﻿using Blackbird.Applications.Sdk.Common;
+using Newtonsoft.Json;
+
+namespace Apps.Pantheon.Models.Entities.File;
+
+public class DeliverableFileEntity
+{
+    [Display("File ID")]
+    [JsonProperty("id")]
+    public string Id { get; set; }
+
+    [Display("File name")]
+    [JsonProperty("assetReference")]
+    public string AssetReference { get; set; }
+
+    [Display("Source language")]
+    [JsonProperty("sourceLocale")]
+    public string SourceLanguage { get; set; }
+
+    [Display("Target language")]
+    [JsonProperty("targetLocale")]
+    public string TargetLanguage { get; set; }
+
+    [Display("Type")]
+    [JsonProperty("type")]
+    public string Type { get; set; }
+}
