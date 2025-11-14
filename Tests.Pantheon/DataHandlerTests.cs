@@ -20,4 +20,18 @@ public class DataHandlerTests : TestBase
         PrintDataHandlerJsonResult(result);
         Assert.IsGreaterThan(0, result.Count());
     }
+
+    [TestMethod]
+    public async Task ProjectDataHandler_ReturnsProjectIds()
+    {
+        // Arrange
+        var handler = new ProjectDataHandler(InvocationContext);
+
+        // Act
+        var result = await handler.GetDataAsync(new DataSourceContext { }, CancellationToken.None);
+
+        // Assert
+        PrintDataHandlerJsonResult(result);
+        Assert.IsGreaterThan(0, result.Count());
+    }
 }
