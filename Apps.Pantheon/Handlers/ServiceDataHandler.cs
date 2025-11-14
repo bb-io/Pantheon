@@ -1,5 +1,5 @@
 ﻿using RestSharp;
-using Apps.Pantheon.Models.Response;
+using Apps.Pantheon.Models.Response.Service;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
 
