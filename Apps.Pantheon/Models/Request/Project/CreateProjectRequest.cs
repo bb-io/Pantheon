@@ -2,6 +2,7 @@
 using Apps.Pantheon.Handlers.Static;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pantheon.Models.Request.Project;
 
@@ -17,11 +18,11 @@ public class CreateProjectRequest
     public DateTime? DueDate { get; set; }
 
     [Display("Source language")]
-    [DataSource(typeof(LanguageDataHandler))]
+    [StaticDataSource(typeof(LanguageDataHandler))]
     public string SourceLanguage { get; set; }
 
     [Display("Target language")]
-    [DataSource(typeof(LanguageDataHandler))]
+    [StaticDataSource(typeof(LanguageDataHandler))]
     public string TargetLanguage { get; set; }
 
     [Display("Services")]
