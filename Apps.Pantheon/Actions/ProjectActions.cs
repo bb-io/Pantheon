@@ -3,6 +3,7 @@ using Apps.Pantheon.Constants;
 using Apps.Pantheon.Models.Response;
 using Apps.Pantheon.Models.Identifiers;
 using Apps.Pantheon.Models.Request.Project;
+using Apps.Pantheon.Models.Response.File;
 using Apps.Pantheon.Models.Response.Project;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
@@ -50,12 +51,23 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     }
 
     [Action("Start project", Description = "Start a project with a specific ID")]
-    public async Task StartProject([ActionParameter] ProjectIdentifier input)
+    public async Task StartProject([ActionParameter] ProjectIdentifier project)
     {
-        var request = new RestRequest($"project/{input.Id}/start", Method.Put);
+        // After some projects finish processing, check if deliverables still remain in the list of files (assets)
+        var projectFilesRequest = new RestRequest($"project/{project.Id}/files", Method.Get);
+        var projectFiles = await Client.ExecuteWithErrorHandling<SearchFilesResponse>(projectFilesRequest);
+        if (projectFiles.Data.Count == 0)
+        {
+            throw new PluginMisconfigurationException(
+                $"A project {project.Id} cannot be started without any files. " +
+                $"Please upload at least one file before starting it"
+            );
+        }
+
+        var request = new RestRequest($"project/{project.Id}/start", Method.Put);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
 
         if (result.Data != "Project started successfully")
-            throw new PluginApplicationException($"Failed to start project {input.Id}: {result.Data}");
+            throw new PluginApplicationException($"Failed to start project {project.Id}: {result.Data}");
     }
 }

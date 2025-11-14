@@ -1,7 +1,8 @@
 ﻿using Tests.Pantheon.Base;
 using Apps.Pantheon.Actions;
-using Apps.Pantheon.Models.Request.Project;
 using Apps.Pantheon.Models.Identifiers;
+using Apps.Pantheon.Models.Request.Project;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Tests.Pantheon;
 
@@ -44,7 +45,7 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "abba123",
+			ProjectReferenceId = "hello",
 			Name = "Test from tests",
 			Services = ["13"],
 			SourceLanguage = "en-US",
@@ -60,13 +61,29 @@ public class ProjectActionTests : TestBase
 	}
 
 	[TestMethod]
-	public async Task StartProject_IsSuccess()
+	public async Task StartProject_WithFilesInIt_IsSuccess()
 	{
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
-		var input = new ProjectIdentifier { Id = "3378249995" };
+		var input = new ProjectIdentifier { Id = "3378250001" };
 
 		// Act
 		await action.StartProject(input);
-	}
+    }
+
+    [TestMethod]
+    public async Task StartProject_WithoutFilesInIt_ThrowsMisconfigException()
+    {
+        // Arrange
+        var action = new ProjectActions(InvocationContext);
+        var input = new ProjectIdentifier { Id = "3378250001" };
+
+        // Act
+        var ex = await Assert.ThrowsExactlyAsync<PluginMisconfigurationException>(async () => 
+			await action.StartProject(input)
+		);
+
+        // Assert
+        Assert.Contains("Please upload at least one file before starting", ex.Message);
+    }
 }
