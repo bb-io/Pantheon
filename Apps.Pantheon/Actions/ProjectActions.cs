@@ -1,7 +1,12 @@
 using RestSharp;
+using Apps.Pantheon.Constants;
 using Apps.Pantheon.Models.Response;
+using Apps.Pantheon.Models.Request.Project;
+using Apps.Pantheon.Models.Response.Project;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 
 namespace Apps.Pantheon.Actions;
 
@@ -13,5 +18,24 @@ public class ProjectActions(InvocationContext invocationContext) : Invocable(inv
     {
         var request = new RestRequest("projects", Method.Get);
         return await Client.ExecuteWithErrorHandling<SearchProjectsResponse>(request);
+    }
+
+    [Action("Create project", Description = "Create a new project")]
+    public async Task<CreateProjectResponse> CreateProject([ActionParameter] CreateProjectRequest input)
+    {
+        var request = new RestRequest("project", Method.Post);
+        var body = new
+        {
+            projectReferenceId = input.ProjectReferenceId,
+            name = input.Name,
+            dueDate = input.DueDate,
+            languages = new[] { new { source = input.SourceLanguage, target = input.TargetLanguage } },
+            services = input.Services.Select(x => new { id = x }).ToArray()
+        };
+
+        request.WithJsonBody(body, JsonConfig.Settings);
+
+        var result = await Client.ExecuteWithErrorHandling<DataResponse<CreateProjectResponse>>(request); 
+        return result.Data;
     }
 }

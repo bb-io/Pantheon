@@ -1,5 +1,6 @@
 ﻿using Tests.Pantheon.Base;
 using Apps.Pantheon.Actions;
+using Apps.Pantheon.Models.Request.Project;
 
 namespace Tests.Pantheon;
 
@@ -14,6 +15,28 @@ public class ProjectActionTests : TestBase
 
 		// Act
 		var result = await action.SearchProjects();
+
+		// Assert
+		PrintJsonResult(result);
+		Assert.IsNotNull(result);
+	}
+
+	[TestMethod]
+	public async Task CreateProject_ReturnsProjectId()
+	{
+		// Arrange
+		var action = new ProjectActions(InvocationContext);
+		var request = new CreateProjectRequest
+		{
+			ProjectReferenceId = "123",
+			Name = "Test from tests",
+			Services = ["13"],
+			SourceLanguage = "en",
+			TargetLanguage = "uk-UA"
+		};
+
+		// Act
+		var result = await action.CreateProject(request);
 
 		// Assert
 		PrintJsonResult(result);
