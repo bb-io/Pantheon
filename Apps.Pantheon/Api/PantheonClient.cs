@@ -1,4 +1,5 @@
 using Apps.Pantheon.Constants;
+using Apps.Pantheon.Models.Response.Error;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
@@ -20,8 +21,14 @@ public class PantheonClient : BlackBirdRestClient
 
     protected override Exception ConfigureErrorException(RestResponse response)
     {
-        var error = JsonConvert.DeserializeObject(response.Content);
-        var errorMessage = "";
+        if (response.Content is null)
+        {
+            var message = response.ErrorMessage ?? "No content returned by server";
+            throw new PluginApplicationException($"Status {response.StatusCode} - {message}");
+        }
+
+        var error = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
+        var errorMessage = $"Status {error?.Status} - {error?.Message}";
 
         throw new PluginApplicationException(errorMessage);
     }
