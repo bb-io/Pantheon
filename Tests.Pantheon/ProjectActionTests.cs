@@ -64,7 +64,7 @@ public class ProjectActionTests : TestBase
 	{
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
-		var input = new ProjectIdentifier { ProjectId = "3378249983" };
+		var input = new ProjectIdentifier { ProjectId = "3378249995" };
 
 		// Act
 		await action.StartProject(input);

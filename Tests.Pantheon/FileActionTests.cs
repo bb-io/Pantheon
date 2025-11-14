@@ -14,8 +14,8 @@ public class FileActionTests : TestBase
     {
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { ProjectId = "3378249996" };
-		var file = new FileReference { Name = "file.html" };
+		var project = new ProjectIdentifier { ProjectId = "3378249995" };
+		var file = new FileReference { Name = "file1.html" };
 		var request = new UploadFileRequest 
 		{ 
 			File = file, 
@@ -31,4 +31,19 @@ public class FileActionTests : TestBase
 		PrintJsonResult(result);
 		Assert.IsNotNull(result);
 	}
+
+	[TestMethod]
+	public async Task SearchFiles_ReturnsFiles()
+	{
+		// Arrange
+		var action = new FileActions(InvocationContext, FileManager);
+		var project = new ProjectIdentifier { ProjectId = "3378249995" };
+
+		// Act
+		var result = await action.SearchFiles(project);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
 }

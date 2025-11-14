@@ -42,4 +42,15 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         var result = await Client.ExecuteWithErrorHandling<DataResponse<UploadFileResponse>>(request);
         return result.Data;
     }
+
+    [Action("Search files", Description = "Get a list of files for a specific project")]
+    public async Task<SearchFilesResponse> SearchFiles([ActionParameter] ProjectIdentifier project)
+    {
+        // TODO: Combine with endpoint
+        // https://hypnos-client-api.welocalize.io/docs/client-api.html#operation/clientApiGetDeliverableList
+        // to define whether file is ready to be delivered or not.
+
+        var request = new RestRequest($"project/{project.ProjectId}/files", Method.Get);
+        return await Client.ExecuteWithErrorHandling<SearchFilesResponse>(request);
+    }
 }
