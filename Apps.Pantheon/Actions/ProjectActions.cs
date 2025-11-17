@@ -65,17 +65,6 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     [Action("Start project", Description = "Start a project with a specific ID")]
     public async Task StartProject([ActionParameter] ProjectIdentifier project)
     {
-        // After some projects finish processing, check if deliverables still remain in the list of files (assets)
-        var projectFilesRequest = new RestRequest($"project/{project.Id}/files", Method.Get);
-        var projectFiles = await Client.ExecuteWithErrorHandling<SearchFilesResponse>(projectFilesRequest);
-        if (projectFiles.Data.Count == 0)
-        {
-            throw new PluginMisconfigurationException(
-                $"A project {project.Id} cannot be started without any files. " +
-                $"Please upload at least one file before starting it"
-            );
-        }
-
         var request = new RestRequest($"project/{project.Id}/start", Method.Put);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
 
