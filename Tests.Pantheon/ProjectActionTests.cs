@@ -32,8 +32,8 @@ public class ProjectActionTests : TestBase
         var request = new SearchProjectsRequest 
 		{
             Statuses = ["created"],
-			DueDateBefore = DateTime.Now + TimeSpan.FromDays(1),
-			DueDateAfter = DateTime.Now + TimeSpan.FromDays(5),
+			DueDateAfter = new DateTime(2025, 11, 15, 10, 0, 0, DateTimeKind.Utc),
+			DueDateBefore = new DateTime(2025, 11, 17, 10, 0, 0, DateTimeKind.Utc),
 		};
 
         // Act
@@ -51,8 +51,8 @@ public class ProjectActionTests : TestBase
         var action = new ProjectActions(InvocationContext);
         var request = new SearchProjectsRequest
         {
-            DueDateBefore = DateTime.Now + TimeSpan.FromDays(4),
-            DueDateAfter = DateTime.Now + TimeSpan.FromDays(1),
+            DueDateAfter = DateTime.Now + TimeSpan.FromDays(4),
+            DueDateBefore = DateTime.Now + TimeSpan.FromDays(1),
         };
 
         // Act
