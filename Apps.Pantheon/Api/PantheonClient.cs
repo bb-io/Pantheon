@@ -6,6 +6,7 @@ using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Text.RegularExpressions;
 
 namespace Apps.Pantheon.Api;
 
@@ -25,6 +26,13 @@ public class PantheonClient : BlackBirdRestClient
         {
             var message = response.ErrorMessage ?? "No content returned by server";
             throw new PluginApplicationException($"Status {response.StatusCode} - {message}");
+        }
+
+        if (response.ContentType == "text/html")
+        {
+            var match = Regex.Match(response.Content, @"<title>(.*?)</title>", RegexOptions.IgnoreCase);
+            string titleErrorMessage = match.Success ? match.Groups[1].Value : "No content returned by server";
+            throw new PluginApplicationException(titleErrorMessage);
         }
 
         var error = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
