@@ -3,6 +3,7 @@ using Apps.Pantheon.Actions;
 using Apps.Pantheon.Models.Identifiers;
 using Apps.Pantheon.Models.Request.File;
 using Blackbird.Applications.Sdk.Common.Files;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Tests.Pantheon;
 
@@ -57,5 +58,35 @@ public class FileActionTests : TestBase
 
 		// Act
 		await action.DeleteFile(project, fileId);
+    }
+
+	[TestMethod]
+	public async Task DownloadTargetFile_ExistingDeliverable_IsSuccess()
+    {
+        // Arrange
+        var action = new FileActions(InvocationContext, FileManager);
+        var project = new ProjectIdentifier { Id = "3378249999" };
+        var request = new DownloadTargetFileRequest { DeliverableId = "20981422" };
+
+        // Act
+        var result = await action.DownloadTargetFile(project, request);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task DownloadTargetFile_NonExistingDeliverable_IsSuccess()
+    {
+        // Arrange
+        var action = new FileActions(InvocationContext, FileManager);
+        var project = new ProjectIdentifier { Id = "3378249999" };
+        var request = new DownloadTargetFileRequest { DeliverableId = "nonexisting" };
+
+        // Act
+        await Assert.ThrowsExactlyAsync<PluginApplicationException>(async () => 
+            await action.DownloadTargetFile(project, request)
+        );
     }
 }
