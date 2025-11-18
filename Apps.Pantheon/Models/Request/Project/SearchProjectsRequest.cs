@@ -8,7 +8,7 @@ public class SearchProjectsRequest
 {
     [Display("Statuses")]
     [StaticDataSource(typeof(ProjectStatusDataHandler))]
-    public List<string>? Statuses { get; set; }
+    public IEnumerable<string>? Statuses { get; set; }
 
     [Display("Due date after")]
     public DateTime? DueDateAfter { get; set; }
