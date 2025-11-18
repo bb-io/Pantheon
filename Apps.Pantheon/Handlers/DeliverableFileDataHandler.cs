@@ -15,6 +15,6 @@ public class DeliverableFileDataHandler([ActionParameter] ProjectIdentifier proj
         var request = new RestRequest($"project/{project.Id}/deliverables", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(request);
 
-        return result.Data.Select(x => new DataSourceItem(x.Id, $"{x.AssetReference} (ID: {x.Id}, Target locale: {x.TargetLanguage})"));
+        return result.Data.Select(x => new DataSourceItem(x.Id, $"{x.AssetReference} (ID: {x.Id}, Target locale: {x.TargetLanguage}, Type: {x.Type})"));
     }
 }
