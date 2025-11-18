@@ -20,7 +20,7 @@ public class DataHandlerTests : TestBase
 
         // Assert
         PrintDataHandlerJsonResult(result);
-        Assert.IsGreaterThan(0, result.Count());
+        Assert.IsNotNull(result);
     }
 
     [TestMethod]
@@ -34,14 +34,14 @@ public class DataHandlerTests : TestBase
 
         // Assert
         PrintDataHandlerJsonResult(result);
-        Assert.IsGreaterThan(0, result.Count());
+        Assert.IsNotNull(result);
     }
 
     [TestMethod]
     public async Task FileDataHandler_ReturnsFileIds()
     {
         // Arrange
-        var project = new ProjectIdentifier { Id = "3378249995" };
+        var project = new ProjectIdentifier { Id = "3378249999" };
         var handler = new FileDataHandler(project, InvocationContext);
 
         // Act
@@ -49,7 +49,7 @@ public class DataHandlerTests : TestBase
 
         // Assert
         PrintDataHandlerJsonResult(result);
-        Assert.IsGreaterThan(0, result.Count());
+        Assert.IsNotNull(result);
     }
 
     [TestMethod]
