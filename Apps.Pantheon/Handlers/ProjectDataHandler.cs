@@ -12,6 +12,6 @@ public class ProjectDataHandler(InvocationContext context) : PantheonInvocable(c
         var request = new RestRequest("projects", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<SearchProjectsResponse>(request);
 
-        return result.Data.Select(x => new DataSourceItem(x.Id, x.Id));
+        return result.Data.Select(x => new DataSourceItem(x.Id, x.ToString()));
     }
 }

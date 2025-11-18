@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Apps.Pantheon.Extensions;
 using Blackbird.Applications.Sdk.Common;
+using Newtonsoft.Json;
 
 namespace Apps.Pantheon.Models.Entities.Project;
 
@@ -20,4 +21,9 @@ public class ProjectEntity
     [JsonProperty("dueDate")]
     [Display("Due date")]
     public DateTime? DueDate { get; set; }
+
+    public override string ToString()
+    {
+        return $"ID: {Id}, Status: {Status.Capitalize()}{(DueDate.HasValue ? ", Due date: " + DueDate : "")}";
+    }
 }
