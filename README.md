@@ -12,6 +12,35 @@ WeLocalize's Pantheon system exposes a RESTful API, referred to as the Hypnos Cl
 
 Before you can connect, make sure you have a Pantheon authentication token.
 
+## Connecting
+
+1. Name your connection for future reference e.g. 'My organization'.
+2. Paste your authentication key.
+3. Click _Authorize connection_ and wait for the process to complete.
+4. Confirm that the connection has appeared and its status is _Connected_.
+
+![connecting](image/README/connection.png)]
+
+## Actions
+
+### Files
+
+- **Upload file**. Upload a file to a created project.
+- **Download target file**. Download a file for a target locale from a specific project.
+- **Search files**. Get a list of files for a specific project.
+- **Delete file**. Delete a specific file from a project.
+
+### Projects
+
+- **Search projects**. Search all projects.
+- **Get project status**. Get status for a specific project.
+- **Create project**. Create a new project.
+- **Start project**. Start a project with a specific ID.
+
+## Events
+
+- **On project status changed**. Triggers when the status of a specified project changes.
+
 ## Feedback
 
 Do you want to use this app or do you have feedback on our implementation? Reach out to us using the [established channels](https://www.blackbird.io/) or create an issue.
