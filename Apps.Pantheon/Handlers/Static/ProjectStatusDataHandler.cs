@@ -8,10 +8,10 @@ public class ProjectStatusDataHandler : IDataSourceItemHandler
     {
         return new List<DataSourceItem>
         {
-            // TODO: add more statuses
             new DataSourceItem("created", "Created"),
             new DataSourceItem("processing", "Processing"),
             new DataSourceItem("in scoping", "In scoping"),
+            new DataSourceItem("completed", "Completed"),
             new DataSourceItem("error", "Error"),
         };
     }
