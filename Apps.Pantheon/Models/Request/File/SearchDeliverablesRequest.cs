@@ -1,6 +1,7 @@
 ﻿using Apps.Pantheon.Handlers;
 using Apps.Pantheon.Handlers.Static;
 using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pantheon.Models.Request.File;
@@ -11,7 +12,7 @@ public class SearchDeliverablesRequest
     public string? AssetReferenceContains { get; set; }
 
     [Display("Target locale")]
-    [StaticDataSource(typeof(DeliverableTargetLocaleDataHandler))]
+    [DataSource(typeof(DeliverableTargetLocaleDataHandler))]
     public string? TargetLocale { get; set; }
 
     [Display("Type")]
