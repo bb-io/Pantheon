@@ -1,10 +1,11 @@
 ﻿using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pantheon.Handlers.Static;
 
-public class ProjectStatusDataHandler : IDataSourceItemHandler
+public class ProjectStatusDataHandler : IStaticDataSourceItemHandler
 {
-    public IEnumerable<DataSourceItem> GetData(DataSourceContext context)
+    public IEnumerable<DataSourceItem> GetData()
     {
         return new List<DataSourceItem>
         {
