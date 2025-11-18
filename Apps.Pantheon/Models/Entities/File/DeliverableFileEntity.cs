@@ -1,5 +1,6 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Apps.Pantheon.Extensions;
+using Blackbird.Applications.Sdk.Common;
 
 namespace Apps.Pantheon.Models.Entities.File;
 
@@ -24,4 +25,9 @@ public class DeliverableFileEntity
     [Display("Type")]
     [JsonProperty("type")]
     public string Type { get; set; }
+
+    public override string ToString()
+    {
+        return $"{AssetReference} (ID: {Id}, Target locale: {TargetLanguage}, Type: {Type.Capitalize()})";
+    }
 }
