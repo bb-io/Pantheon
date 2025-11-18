@@ -2,6 +2,17 @@
 
 public static class FilterHelper
 {
+    public static IEnumerable<T> FilterByStringContains<T>(
+        this IEnumerable<T> source,
+        string? filterValue,
+        Func<T, string?> selector)
+    {
+        if (string.IsNullOrWhiteSpace(filterValue))
+            return source;
+
+        return source.Where(item => selector(item)?.Contains(filterValue, StringComparison.OrdinalIgnoreCase) == true);
+    }
+
     public static IEnumerable<T> FilterByStringArray<T>(
         this IEnumerable<T> source,
         IEnumerable<string>? filterValues,

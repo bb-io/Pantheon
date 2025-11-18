@@ -39,16 +39,38 @@ public class FileActionTests : TestBase
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
 		var project = new ProjectIdentifier { Id = "3378249999" };
+		var input = new SearchDeliverablesRequest { };
 
 		// Act
-		var result = await action.SearchDeliverables(project);
+		var result = await action.SearchDeliverables(project, input);
 
         // Assert
         PrintJsonResult(result);
         Assert.IsNotNull(result);
     }
 
-	[TestMethod]
+    [TestMethod]
+    public async Task SearchDeliverables_WithFilters_ReturnsFiles()
+    {
+        // Arrange
+        var action = new FileActions(InvocationContext, FileManager);
+        var project = new ProjectIdentifier { Id = "3378249999" };
+        var input = new SearchDeliverablesRequest 
+        { 
+            Type = "deliverable",
+            AssetReferenceContains = "transl",
+            TargetLocale = "uk-UA",
+        };
+
+        // Act
+        var result = await action.SearchDeliverables(project, input);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
 	public async Task DeleteFile_IsSuccess()
 	{
 		// Arrange

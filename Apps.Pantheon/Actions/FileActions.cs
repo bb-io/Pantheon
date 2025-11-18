@@ -1,10 +1,13 @@
 ﻿using RestSharp;
 using Newtonsoft.Json;
+using Apps.Pantheon.Helper;
 using Apps.Pantheon.Constants;
-using Apps.Pantheon.Models.Response;
+using Apps.Pantheon.Extensions;
 using Apps.Pantheon.Models.Identifiers;
 using Apps.Pantheon.Models.Request.File;
+using Apps.Pantheon.Models.Response;
 using Apps.Pantheon.Models.Response.File;
+using Apps.Pantheon.Models.Entities.File;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Exceptions;
@@ -74,10 +77,18 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
     }
 
     [Action("Search deliverables", Description = "Get a list of deliverable files for a specific project")]
-    public async Task<SearchDeliverableFilesResponse> SearchDeliverables([ActionParameter] ProjectIdentifier project)
+    public async Task<SearchDeliverableFilesResponse> SearchDeliverables(
+        [ActionParameter] ProjectIdentifier project,
+        [ActionParameter] SearchDeliverablesRequest input)
     {
         var request = new RestRequest($"project/{project.Id}/deliverables", Method.Get);
-        return await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(request);
+        request.AddQueryParameterIfNotEmpty("type", input.Type);
+        request.AddQueryParameterIfNotEmpty("targetLocale", input.TargetLocale);
+
+        var result = await Client.ExecuteWithErrorHandling<DataResponse<IEnumerable<DeliverableFileEntity>>>(request);
+        result.Data = result.Data.FilterByStringContains(input.AssetReferenceContains, x => x.AssetReference);
+
+        return new(result.Data.ToList());
     }
 
     [Action("Delete file", Description = "Delete a specific file from a project")]

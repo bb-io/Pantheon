@@ -1,6 +1,7 @@
 ﻿using Tests.Pantheon.Base;
 using Apps.Pantheon.Handlers;
 using Apps.Pantheon.Models.Identifiers;
+using Apps.Pantheon.Models.Request.File;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Tests.Pantheon;
@@ -57,6 +58,22 @@ public class DataHandlerTests : TestBase
         // Arrange
         var project = new ProjectIdentifier { Id = "3378249999" };
         var handler = new DeliverableFileDataHandler(project, InvocationContext);
+
+        // Act
+        var result = await handler.GetDataAsync(new DataSourceContext { }, CancellationToken.None);
+
+        // Assert
+        PrintDataHandlerJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task DeliverableTargetLocaleDataHandler_ReturnsTargetDeliverableLocales()
+    {
+        // Arrange
+        var project = new ProjectIdentifier { Id = "3378249999" };
+        var input = new SearchDeliverablesRequest { };
+        var handler = new DeliverableTargetLocaleDataHandler(project, input, InvocationContext);
 
         // Act
         var result = await handler.GetDataAsync(new DataSourceContext { }, CancellationToken.None);
