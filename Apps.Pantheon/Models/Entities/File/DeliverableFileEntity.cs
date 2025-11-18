@@ -5,11 +5,11 @@ namespace Apps.Pantheon.Models.Entities.File;
 
 public class DeliverableFileEntity
 {
-    [Display("File ID")]
+    [Display("Deliverable ID")]
     [JsonProperty("id")]
     public string Id { get; set; }
 
-    [Display("File name")]
+    [Display("Asset reference")]
     [JsonProperty("assetReference")]
     public string AssetReference { get; set; }
 

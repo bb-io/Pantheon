@@ -27,7 +27,7 @@ Before you can connect, make sure you have a Pantheon authentication token.
 
 - **Upload file**. Upload a file to a created project.
 - **Download target file**. Download a file for a target locale from a specific project.
-- **Search files**. Get a list of files for a specific project.
+- **Search deliverables**. Get a list of deliverable files for a specific project.
 - **Delete file**. Delete a specific file from a project.
 
 ### Projects

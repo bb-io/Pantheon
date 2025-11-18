@@ -73,17 +73,11 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         return new(hyperlinkResponse.Id, hyperlinkResponse.Name, hyperlinkResponse.Url);
     }
 
-    // TO BE TESTED
-    // We need to wait for a file to process and appear as a deliverable
-    [Action("Search files", Description = "Get a list of files for a specific project")]
-    public async Task<SearchFilesResponse> SearchFiles([ActionParameter] ProjectIdentifier project)
+    [Action("Search deliverables", Description = "Get a list of deliverable files for a specific project")]
+    public async Task<SearchDeliverableFilesResponse> SearchDeliverables([ActionParameter] ProjectIdentifier project)
     {
-        // TODO: Combine with endpoint
-        // https://hypnos-client-api.welocalize.io/docs/client-api.html#operation/clientApiGetDeliverableList
-        // to define whether file is ready to be delivered or not.
-
-        var request = new RestRequest($"project/{project.Id}/files", Method.Get);
-        return await Client.ExecuteWithErrorHandling<SearchFilesResponse>(request);
+        var request = new RestRequest($"project/{project.Id}/deliverables", Method.Get);
+        return await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(request);
     }
 
     [Action("Delete file", Description = "Delete a specific file from a project")]

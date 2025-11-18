@@ -34,14 +34,14 @@ public class FileActionTests : TestBase
 	}
 
 	[TestMethod]
-	public async Task SearchFiles_ReturnsFiles()
+	public async Task SearchDeliverables_WithoutFilters_ReturnsFiles()
 	{
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { Id = "3378249995" };
+		var project = new ProjectIdentifier { Id = "3378249999" };
 
 		// Act
-		var result = await action.SearchFiles(project);
+		var result = await action.SearchDeliverables(project);
 
         // Assert
         PrintJsonResult(result);
