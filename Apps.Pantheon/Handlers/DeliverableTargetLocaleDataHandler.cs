@@ -5,6 +5,7 @@ using Apps.Pantheon.Models.Request.File;
 using Apps.Pantheon.Models.Response.File;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 
 namespace Apps.Pantheon.Handlers;
@@ -17,6 +18,9 @@ public class DeliverableTargetLocaleDataHandler(
 {
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken token)
     {
+        if (string.IsNullOrWhiteSpace(project.ProjectId))
+            throw new PluginMisconfigurationException("Please specify the project ID first");
+
         var request = new RestRequest($"project/{project.ProjectId}/deliverables");
         request.AddQueryParameterIfNotEmpty("type", input.Type);
         request.AddQueryParameterIfNotEmpty("targetLocale", input.TargetLocale);
