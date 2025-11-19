@@ -47,7 +47,9 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         return result.Data;
     }
 
-    [Action("Download target file", Description = "Download a file for a target locale from a specific project")]
+    [Action("Download target file", Description = 
+        "Download a file for a target locale from a specific project. " +
+        "If the project deliverable is a hyperlink, it returns the URL, name and ID without any files")]
     public async Task<DownloadTargetFileResponse> DownloadTargetFile(
         [ActionParameter] ProjectIdentifier projectId,
         [ActionParameter] DownloadTargetFileRequest input)
