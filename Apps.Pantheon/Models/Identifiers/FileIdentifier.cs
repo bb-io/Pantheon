@@ -8,5 +8,5 @@ public class FileIdentifier
 {
     [Display("File ID")]
     [DataSource(typeof(FileDataHandler))]
-    public string Id { get; set; }
+    public string FileId { get; set; }
 }

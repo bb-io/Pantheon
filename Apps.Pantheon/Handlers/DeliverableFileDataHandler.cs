@@ -12,7 +12,7 @@ public class DeliverableFileDataHandler([ActionParameter] ProjectIdentifier proj
 {
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken token)
     {
-        var request = new RestRequest($"project/{project.Id}/deliverables", Method.Get);
+        var request = new RestRequest($"project/{project.ProjectId}/deliverables", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(request);
 
         return result.Data.Select(x => new DataSourceItem(x.Id, x.ToString()));

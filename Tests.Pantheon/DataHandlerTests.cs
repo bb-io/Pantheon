@@ -41,7 +41,7 @@ public class DataHandlerTests : TestBase
     public async Task FileDataHandler_ReturnsFileIds()
     {
         // Arrange
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var handler = new FileDataHandler(project, InvocationContext);
 
         // Act
@@ -56,7 +56,7 @@ public class DataHandlerTests : TestBase
     public async Task DeliverableFileDataHandler_ReturnsDeliverableFileIds()
     {
         // Arrange
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var handler = new DeliverableFileDataHandler(project, InvocationContext);
 
         // Act
@@ -71,7 +71,7 @@ public class DataHandlerTests : TestBase
     public async Task DeliverableTargetLocaleDataHandler_ReturnsTargetDeliverableLocales()
     {
         // Arrange
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var input = new SearchDeliverablesRequest { };
         var handler = new DeliverableTargetLocaleDataHandler(project, input, InvocationContext);
 

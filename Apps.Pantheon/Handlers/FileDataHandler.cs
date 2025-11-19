@@ -12,7 +12,7 @@ public class FileDataHandler([ActionParameter] ProjectIdentifier project, Invoca
 {
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken token)
     {
-        var request = new RestRequest($"project/{project.Id}/files", Method.Get);
+        var request = new RestRequest($"project/{project.ProjectId}/files", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<SearchFilesResponse>(request);
 
         return result.Data.Select(x => new DataSourceItem(x.Id, $"{x.AssetReference} (ID: {x.Id})"));

@@ -69,7 +69,7 @@ public class ProjectActionTests : TestBase
     {
         // Arrange
         var action = new ProjectActions(InvocationContext);
-		var request = new ProjectIdentifier { Id = "3378250003" };
+		var request = new ProjectIdentifier { ProjectId = "3378250003" };
 
         // Act
         var result = await action.GetProjectStatus(request);
@@ -107,7 +107,7 @@ public class ProjectActionTests : TestBase
 	{
 		// Arrange
 		var action = new ProjectActions(InvocationContext);
-		var input = new ProjectIdentifier { Id = "3378250003" };
+		var input = new ProjectIdentifier { ProjectId = "3378250003" };
 
 		// Act
 		await action.StartProject(input);
@@ -118,7 +118,7 @@ public class ProjectActionTests : TestBase
     {
         // Arrange
         var action = new ProjectActions(InvocationContext);
-        var input = new ProjectIdentifier { Id = "3378250001" };
+        var input = new ProjectIdentifier { ProjectId = "3378250001" };
 
         // Act
         var ex = await Assert.ThrowsExactlyAsync<PluginMisconfigurationException>(async () => 

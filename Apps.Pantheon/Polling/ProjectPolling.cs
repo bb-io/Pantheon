@@ -16,7 +16,7 @@ public class ProjectPolling(InvocationContext context) : PantheonInvocable(conte
         PollingEventRequest<ProjectStatusMemory> request,
         [PollingEventParameter] ProjectIdentifier project)
     {
-        var statusRequest = new RestRequest($"project/{project.Id}/status", Method.Get);
+        var statusRequest = new RestRequest($"project/{project.ProjectId}/status", Method.Get);
         var response = await Client.ExecuteWithErrorHandling<DataResponse<GetProjectStatusResponse>>(statusRequest);
         string currentStatus = response.Data.Status;
 

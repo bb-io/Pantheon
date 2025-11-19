@@ -14,7 +14,7 @@ public class ProjectPollingTests : TestBase
     {
         // Arrange
         var polling = new ProjectPolling(InvocationContext);
-        var project = new ProjectIdentifier { Id = "3378250000" };
+        var project = new ProjectIdentifier { ProjectId = "3378250000" };
         var memory = new ProjectStatusMemory { LastStatus = "created" };
         var request = new PollingEventRequest<ProjectStatusMemory> { Memory = memory, PollingTime = DateTime.UtcNow };
 

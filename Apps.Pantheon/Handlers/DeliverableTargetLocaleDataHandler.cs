@@ -17,7 +17,7 @@ public class DeliverableTargetLocaleDataHandler(
 {
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken token)
     {
-        var request = new RestRequest($"project/{project.Id}/deliverables");
+        var request = new RestRequest($"project/{project.ProjectId}/deliverables");
         request.AddQueryParameterIfNotEmpty("type", input.Type);
         request.AddQueryParameterIfNotEmpty("targetLocale", input.TargetLocale);
 

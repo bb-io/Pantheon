@@ -8,5 +8,5 @@ public class ProjectIdentifier
 {
     [Display("Project ID")]
     [DataSource(typeof(ProjectDataHandler))]
-    public string Id { get; set; }
+    public string ProjectId { get; set; }
 }

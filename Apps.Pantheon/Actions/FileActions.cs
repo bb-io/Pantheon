@@ -25,7 +25,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         [ActionParameter] ProjectIdentifier project, 
         [ActionParameter] UploadFileRequest input)
     {
-        var request = new RestRequest($"project/{project.Id}/file", Method.Post);
+        var request = new RestRequest($"project/{project.ProjectId}/file", Method.Post);
 
         var fileStream = await fileManagementClient.DownloadAsync(input.File); 
         using var ms = new MemoryStream();
@@ -52,12 +52,12 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         [ActionParameter] ProjectIdentifier projectId,
         [ActionParameter] DownloadTargetFileRequest input)
     {
-        var request = new RestRequest($"project/{projectId.Id}/deliverable/{input.DeliverableId}", Method.Get);
+        var request = new RestRequest($"project/{projectId.ProjectId}/deliverable/{input.DeliverableId}", Method.Get);
         var response = await Client.ExecuteWithErrorHandling(request);
 
         if (response.ContentType == "text/html")
         {
-            var deliverablesRequest = new RestRequest($"project/{projectId.Id}/deliverables");
+            var deliverablesRequest = new RestRequest($"project/{projectId.ProjectId}/deliverables");
             var deliverables = await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(deliverablesRequest);
             
             var deliverable = deliverables.Data.First(d => d.Id == input.DeliverableId);
@@ -81,7 +81,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         [ActionParameter] ProjectIdentifier project,
         [ActionParameter] SearchDeliverablesRequest input)
     {
-        var request = new RestRequest($"project/{project.Id}/deliverables", Method.Get);
+        var request = new RestRequest($"project/{project.ProjectId}/deliverables", Method.Get);
         request.AddQueryParameterIfNotEmpty("type", input.Type);
         request.AddQueryParameterIfNotEmpty("targetLocale", input.TargetLocale);
 
@@ -92,14 +92,16 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
     }
 
     [Action("Delete file", Description = "Delete a specific file from a project")]
-    public async Task DeleteFile([ActionParameter] ProjectIdentifier project, [ActionParameter] FileIdentifier fileId)
+    public async Task DeleteFile(
+        [ActionParameter] ProjectIdentifier project, 
+        [ActionParameter] FileIdentifier fileId)
     {
-        var request = new RestRequest($"project/{project.Id}/file/{fileId.Id}", Method.Delete);
+        var request = new RestRequest($"project/{project.ProjectId}/file/{fileId.FileId}", Method.Delete);
         var result = await Client.ExecuteWithErrorHandling<DataResponse<string>>(request);
 
         if (result.Data != "Success file deleted")
             throw new PluginApplicationException(
-                $"Failed to delete file {fileId.Id} from the project {project.Id}: {result.Data}"
+                $"Failed to delete file {fileId.FileId} from the project {project.ProjectId}: {result.Data}"
             );
     }
 }

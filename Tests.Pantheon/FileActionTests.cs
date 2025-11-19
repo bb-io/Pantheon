@@ -15,7 +15,7 @@ public class FileActionTests : TestBase
     {
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { Id = "3378249998" };
+		var project = new ProjectIdentifier { ProjectId = "3378249998" };
 		var file = new FileReference { Name = "file1.html" };
 		var request = new UploadFileRequest 
 		{ 
@@ -38,7 +38,7 @@ public class FileActionTests : TestBase
 	{
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { Id = "3378249999" };
+		var project = new ProjectIdentifier { ProjectId = "3378249999" };
 		var input = new SearchDeliverablesRequest { };
 
 		// Act
@@ -54,7 +54,7 @@ public class FileActionTests : TestBase
     {
         // Arrange
         var action = new FileActions(InvocationContext, FileManager);
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var input = new SearchDeliverablesRequest 
         { 
             Type = "deliverable",
@@ -75,8 +75,8 @@ public class FileActionTests : TestBase
 	{
 		// Arrange
 		var action = new FileActions(InvocationContext, FileManager);
-		var project = new ProjectIdentifier { Id = "3378249995" };
-		var fileId = new FileIdentifier { Id = "1708922" };
+		var project = new ProjectIdentifier { ProjectId = "3378249995" };
+		var fileId = new FileIdentifier { FileId = "1708922" };
 
 		// Act
 		await action.DeleteFile(project, fileId);
@@ -87,7 +87,7 @@ public class FileActionTests : TestBase
     {
         // Arrange
         var action = new FileActions(InvocationContext, FileManager);
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var request = new DownloadTargetFileRequest { DeliverableId = "20981422" };
 
         // Act
@@ -103,7 +103,7 @@ public class FileActionTests : TestBase
     {
         // Arrange
         var action = new FileActions(InvocationContext, FileManager);
-        var project = new ProjectIdentifier { Id = "3378249999" };
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
         var request = new DownloadTargetFileRequest { DeliverableId = "nonexisting" };
 
         // Act
