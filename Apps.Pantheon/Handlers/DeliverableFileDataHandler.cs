@@ -19,6 +19,6 @@ public class DeliverableFileDataHandler([ActionParameter] ProjectIdentifier proj
         var request = new RestRequest($"project/{project.ProjectId}/deliverables", Method.Get);
         var result = await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(request);
 
-        return result.Data.Select(x => new DataSourceItem(x.Id, x.ToString()));
+        return result.Data.Select(x => new DataSourceItem(x.Id, x.ToString())).DistinctBy(y => y.Value);
     }
 }
