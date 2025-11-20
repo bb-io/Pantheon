@@ -41,6 +41,10 @@ Before you can connect, make sure you have a Pantheon authentication token.
 
 - **On project status changed**. Triggers when the status of a specified project changes.
 
+## Example bird
+
+![bird](image/README/bird.png)]
+
 ## Feedback
 
 Do you want to use this app or do you have feedback on our implementation? Reach out to us using the [established channels](https://www.blackbird.io/) or create an issue.
