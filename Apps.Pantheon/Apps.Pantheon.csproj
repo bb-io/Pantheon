@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>WeLocalize Pantheon [Beta]</Product>
         <Description>The Pantheon API helps you submit translation jobs, track them and retrieve the finished files.</Description>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <AssemblyName>Apps.Pantheon</AssemblyName>
     </PropertyGroup>
 
