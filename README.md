@@ -19,7 +19,7 @@ Before you can connect, make sure you have a Pantheon authentication token.
 3. Click _Authorize connection_ and wait for the process to complete.
 4. Confirm that the connection has appeared and its status is _Connected_.
 
-![connecting](image/README/connection.png)]
+![connecting](image/README/connection.png)
 
 ## Actions
 
@@ -43,7 +43,7 @@ Before you can connect, make sure you have a Pantheon authentication token.
 
 ## Example bird
 
-![bird](image/README/bird.png)]
+![bird](image/README/bird.png)
 
 ## Feedback
 
