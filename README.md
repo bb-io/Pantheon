@@ -16,8 +16,9 @@ Before you can connect, make sure you have a Pantheon authentication token.
 
 1. Name your connection for future reference e.g. 'My organization'.
 2. Paste your authentication key.
-3. Click _Authorize connection_ and wait for the process to complete.
-4. Confirm that the connection has appeared and its status is _Connected_.
+3. Choose the base URL: either the 'Sandbox' or 'Production' one.
+4. Click _Authorize connection_ and wait for the process to complete.
+5. Confirm that the connection has appeared and its status is _Connected_.
 
 ![connecting](image/README/connection.png)
 
