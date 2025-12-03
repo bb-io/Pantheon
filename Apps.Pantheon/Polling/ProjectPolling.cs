@@ -14,7 +14,8 @@ public class ProjectPolling(InvocationContext context) : PantheonInvocable(conte
     [PollingEvent("On project status changed", Description = "Triggers when the status of a specified project changes")]
     public async Task<PollingEventResponse<ProjectStatusMemory, GetProjectStatusResponse>> OnProjectStatusChanged(
         PollingEventRequest<ProjectStatusMemory> request,
-        [PollingEventParameter] ProjectIdentifier project)
+        [PollingEventParameter] ProjectIdentifier project,
+        [PollingEventParameter] OnProjectStatusChangedRequest input)
     {
         var statusRequest = new RestRequest($"project/{project.ProjectId}/status", Method.Get);
         var response = await Client.ExecuteWithErrorHandling<DataResponse<GetProjectStatusResponse>>(statusRequest);
@@ -31,7 +32,27 @@ public class ProjectPolling(InvocationContext context) : PantheonInvocable(conte
         }
 
         string previousStatus = request.Memory.LastStatus;
-        if (previousStatus != currentStatus)
+        if (!string.IsNullOrEmpty(input.Status))
+        {
+            if (input.Status.Equals(currentStatus, StringComparison.OrdinalIgnoreCase))
+            {
+                return new PollingEventResponse<ProjectStatusMemory, GetProjectStatusResponse>
+                {
+                    FlyBird = true,
+                    Memory = new ProjectStatusMemory(currentStatus),
+                    Result = response.Data
+                };
+            }
+
+            return new PollingEventResponse<ProjectStatusMemory, GetProjectStatusResponse>
+            {
+                FlyBird = false,
+                Memory = new ProjectStatusMemory(currentStatus),
+                Result = null
+            };
+        }
+
+        if (!previousStatus.Equals(currentStatus, StringComparison.OrdinalIgnoreCase))
         {
             return new PollingEventResponse<ProjectStatusMemory, GetProjectStatusResponse>
             {

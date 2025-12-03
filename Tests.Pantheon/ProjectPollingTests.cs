@@ -16,10 +16,11 @@ public class ProjectPollingTests : TestBase
         var polling = new ProjectPolling(InvocationContext);
         var project = new ProjectIdentifier { ProjectId = "3378250000" };
         var memory = new ProjectStatusMemory { LastStatus = "created" };
+        var input = new OnProjectStatusChangedRequest { };
         var request = new PollingEventRequest<ProjectStatusMemory> { Memory = memory, PollingTime = DateTime.UtcNow };
 
         // Act
-        var result = await polling.OnProjectStatusChanged(request, project);
+        var result = await polling.OnProjectStatusChanged(request, project, input);
 
         // Assert
         PrintJsonResult(result);
