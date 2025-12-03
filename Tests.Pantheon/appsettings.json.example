@@ -1,5 +1,6 @@
 {
   "ConnectionDefinition": {
+    "BaseUrl": "https://hypnos-client-api.welocalize.io",
     "AuthKey": ""
   },
   "TestFolder": "TestFiles"

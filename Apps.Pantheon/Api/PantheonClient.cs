@@ -14,7 +14,7 @@ public class PantheonClient : BlackBirdRestClient
 {
     public PantheonClient(IEnumerable<AuthenticationCredentialsProvider> creds) : base(new()
     {
-        BaseUrl = new Uri("https://hypnos-client-api.welocalize.io/v1/client-api/"),
+        BaseUrl = new Uri($"{creds.Get(CredsNames.BaseUrl).Value}/v1/client-api/"),
     })
     {
         this.AddDefaultHeader("x-pantheon-auth-key", creds.Get(CredsNames.AuthKey).Value);
