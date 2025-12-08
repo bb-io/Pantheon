@@ -57,25 +57,26 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         var request = new RestRequest($"project/{projectId.ProjectId}/deliverable/{input.DeliverableId}", Method.Get);
         var response = await Client.ExecuteWithErrorHandling(request);
 
-        if (response.ContentType == "text/html")
+        if (response.ContentType!.StartsWith("application/json", StringComparison.OrdinalIgnoreCase))
         {
-            var deliverablesRequest = new RestRequest($"project/{projectId.ProjectId}/deliverables");
-            var deliverables = await Client.ExecuteWithErrorHandling<SearchDeliverableFilesResponse>(deliverablesRequest);
-            
-            var deliverable = deliverables.Data.First(d => d.Id == input.DeliverableId);
-            var deliverableFileName = deliverable.AssetReference;
-            var deliverableId = deliverable.Id;
-
-            var bytes = response.RawBytes!;
-            using var outputStream = new MemoryStream(bytes);
-            var file = await fileManagementClient.UploadAsync(outputStream, response.ContentType, deliverableFileName);
-            return new(deliverableId, deliverableFileName, file);
+            var hyperlinkResponse = JsonConvert.DeserializeObject<DeliverableHyperlinkResponse>(response.Content!)
+                ?? throw new PluginApplicationException("Error while parsing a hyperlink deliverable response");
+            return new(hyperlinkResponse.Id, hyperlinkResponse.Name, hyperlinkResponse.Url);
         }
+        else
+        {
+            var contentDisposition = response.ContentHeaders?
+                .FirstOrDefault(h => h.Name!.Equals("Content-Disposition", StringComparison.OrdinalIgnoreCase))
+                ?.Value?.ToString();
+            var deliverableFileName = ExtractFilenameFromHeader(contentDisposition) ?? input.DeliverableId;
 
-        var hyperlinkResponse = JsonConvert.DeserializeObject<DeliverableHyperlinkResponse>(response.Content!) 
-            ?? throw new PluginApplicationException("Error while parsing a hyperlink deliverable response");
+            var bytes = response.RawBytes 
+                ?? throw new PluginApplicationException("No file content received from the server");
 
-        return new(hyperlinkResponse.Id, hyperlinkResponse.Name, hyperlinkResponse.Url);
+            await using var outputStream = new MemoryStream(bytes);
+            var file = await fileManagementClient.UploadAsync(outputStream, response.ContentType!, deliverableFileName);
+            return new(input.DeliverableId, deliverableFileName, file);
+        }
     }
 
     [Action("Search deliverables", Description = "Get a list of deliverable files for a specific project")]
@@ -105,5 +106,21 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
             throw new PluginApplicationException(
                 $"Failed to delete file {fileId.FileId} from the project {project.ProjectId}: {result.Data}"
             );
+    }
+
+    private static string? ExtractFilenameFromHeader(string? header)
+    {
+        if (string.IsNullOrEmpty(header))
+            return null;
+
+        const string fileNameKey = "filename=";
+
+        var index = header.IndexOf(fileNameKey, StringComparison.OrdinalIgnoreCase);
+        if (index < 0)
+            return null;
+
+        var fileNamePart = header.Substring(index + fileNameKey.Length);
+
+        return fileNamePart.Trim('"');
     }
 }

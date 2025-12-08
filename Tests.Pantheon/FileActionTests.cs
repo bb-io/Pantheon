@@ -87,8 +87,8 @@ public class FileActionTests : TestBase
     {
         // Arrange
         var action = new FileActions(InvocationContext, FileManager);
-        var project = new ProjectIdentifier { ProjectId = "3378249999" };
-        var request = new DownloadTargetFileRequest { DeliverableId = "20981422" };
+        var project = new ProjectIdentifier { ProjectId = "3378250027" };
+        var request = new DownloadTargetFileRequest { DeliverableId = "20981632" };
 
         // Act
         var result = await action.DownloadTargetFile(project, request);
