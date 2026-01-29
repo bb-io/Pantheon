@@ -59,11 +59,11 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
 
         if (input.ProjectInfoProperties != null)
         {
-            var properties = input.ProjectInfoProperties.ToList();
-            var values = input.ProjectInfoValues!.ToList();
+            var properties = input.ProjectInfoProperties;
+            var values = input.ProjectInfoValues!;
 
             var extraProjectInfo = new Dictionary<string, string>();
-            for (int i = 0; i < input.ProjectInfoProperties.Count(); i++)
+            for (int i = 0; i < properties.Count; i++)
             {
                 string infoProperty = properties[i];
                 string intoValue = values[i];
@@ -71,6 +71,34 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
             }
 
             body["extraProjectInfo"] = extraProjectInfo;
+        }
+
+        if (input.AnalysisBucketNames != null && input.AnalysisValues != null)
+        {
+            var locales = input.TargetLanguages;
+            var buckets = input.AnalysisBucketNames;
+            var values = input.AnalysisValues;
+
+            var analysisObj = new Dictionary<string, Dictionary<string, object>>();
+            int valueIndex = 0;
+
+            foreach (var locale in locales)
+            {
+                var localeBuckets = new Dictionary<string, object>();
+
+                foreach (var bucket in buckets)
+                {
+                    if (valueIndex >= values.Count) 
+                        break;
+
+                    localeBuckets[bucket] = values[valueIndex];
+                    valueIndex++;
+                }
+
+                analysisObj[locale] = localeBuckets;
+            }
+
+            body["analysis"] = analysisObj;
         }
 
         request.WithJsonBody(body, JsonConfig.Settings);

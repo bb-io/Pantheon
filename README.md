@@ -37,6 +37,9 @@ Before you can connect, make sure you have a welocalize authentication token.
 - **Search projects**. Search all projects.
 - **Get project status**. Get status for a specific project.
 - **Create project**. Create a new project.
+	- **Analysis** values are grouped by language. 
+	Example: For target languages `en-US` and `uk-UA`, with bucket names `LOCKED` and `PERFECT`, 
+	you must provide the values in this order: `LockedEN`, `PerfectEN`, `LockedUA`, `PerfectUA`.
 - **Start project**. Start a project with a specific ID.
 
 ## Events

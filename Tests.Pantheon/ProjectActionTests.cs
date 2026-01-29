@@ -86,14 +86,14 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "helloExtraProjectInfo",
-			Name = "Test from tests (extra proj info)",
+			ProjectReferenceId = "helloAnalysisObject",
+			Name = "Test from tests (analysis)",
 			Services = ["13"],
 			SourceLanguage = "en-US",
-			TargetLanguages = ["uk-UA"],
+			TargetLanguages = ["uk-UA", "de-AT"],
 			DueDate = DateTime.Now + TimeSpan.FromDays(5),
-            ProjectInfoProperties = ["hello", "123"],
-            ProjectInfoValues = ["world", "456"]
+            AnalysisBucketNames = ["LOCKED", "PERFECT"],
+            AnalysisValues = ["LockedUA", "PerfectUA", "LockedDE", "PerfectDE"]
 		};
 
 		// Act
