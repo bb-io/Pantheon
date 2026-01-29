@@ -52,10 +52,12 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
         {
             { "projectReferenceId", input.ProjectReferenceId },
             { "name", input.Name },
-            { "dueDate", input.DueDate },
             { "languages", input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray() },
             { "services", input.Services.Select(x => new { id = x }).ToArray() },
         };
+
+        if (input.DueDate.HasValue)
+            body["dueDate"] = input.DueDate;
 
         if (input.ProjectInfoProperties != null)
         {
