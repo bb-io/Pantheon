@@ -36,10 +36,10 @@ public class CreateProjectRequest
     [Display("Project info values")]
     public List<string>? ProjectInfoValues { get; set; }
 
-    [Display("Analysis - Unique Bucket Names", Description = "List of unique bucket definitions (e.g. '100%', 'New') applicable to all locales")]
+    [Display("Analysis bucket names", Description = "List of unique bucket definitions (e.g. '100%', 'New') applicable to all locales")]
     public List<string>? AnalysisBucketNames { get; set; }
 
-    [Display("Analysis - All Values", Description = "List of values. Order must be: TargetLanguage 1 (all buckets), then TargetLanguage 2 (all buckets), etc")]
+    [Display("Analysis values", Description = "List of values. Order must be: TargetLanguage 1 (all buckets), then TargetLanguage 2 (all buckets), etc")]
     public List<string>? AnalysisValues { get; set; }
 
     public void Validate()
