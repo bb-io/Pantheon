@@ -45,15 +45,33 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     [Action("Create project", Description = "Create a new project")]
     public async Task<CreateProjectResponse> CreateProject([ActionParameter] CreateProjectRequest input)
     {
+        input.Validate();
+
         var request = new RestRequest("project", Method.Post);
-        var body = new
+        var body = new Dictionary<string, object?>
         {
-            projectReferenceId = input.ProjectReferenceId,
-            name = input.Name,
-            dueDate = input.DueDate,
-            languages = input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray(),
-            services = input.Services.Select(x => new { id = x }).ToArray()
+            { "projectReferenceId", input.ProjectReferenceId },
+            { "name", input.Name },
+            { "dueDate", input.DueDate },
+            { "languages", input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray() },
+            { "services", input.Services.Select(x => new { id = x }).ToArray() },
         };
+
+        if (input.ProjectInfoProperties != null)
+        {
+            var properties = input.ProjectInfoProperties.ToList();
+            var values = input.ProjectInfoValues!.ToList();
+
+            var extraProjectInfo = new Dictionary<string, string>();
+            for (int i = 0; i < input.ProjectInfoProperties.Count(); i++)
+            {
+                string infoProperty = properties[i];
+                string intoValue = values[i];
+                extraProjectInfo[infoProperty] = intoValue;
+            }
+
+            body["extraProjectInfo"] = extraProjectInfo;
+        }
 
         request.WithJsonBody(body, JsonConfig.Settings);
 

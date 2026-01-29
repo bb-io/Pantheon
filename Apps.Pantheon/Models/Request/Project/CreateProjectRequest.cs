@@ -2,6 +2,7 @@
 using Apps.Pantheon.Handlers.Static;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pantheon.Models.Request.Project;
@@ -28,4 +29,20 @@ public class CreateProjectRequest
     [Display("Services")]
     [DataSource(typeof(ServiceDataHandler))]
     public List<string> Services { get; set; }
+
+    [Display("Project info properties", Description = "Corresponds to the 'Project info values' input. Values must be in the same order")]
+    public IEnumerable<string>? ProjectInfoProperties { get; set; }
+
+    [Display("Project info values")]
+    public IEnumerable<string>? ProjectInfoValues { get; set; }
+
+    public void Validate()
+    {
+        if (ProjectInfoProperties?.Count() != ProjectInfoValues?.Count())
+        {
+            throw new PluginMisconfigurationException(
+                "The number of 'Project info properties' must match the number of values in the 'Project info values' input"
+            );
+        }
+    }
 }

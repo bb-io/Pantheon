@@ -86,12 +86,14 @@ public class ProjectActionTests : TestBase
 		var action = new ProjectActions(InvocationContext);
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "hello4",
-			Name = "Test from tests",
+			ProjectReferenceId = "helloExtraProjectInfo",
+			Name = "Test from tests (extra proj info)",
 			Services = ["13"],
 			SourceLanguage = "en-US",
 			TargetLanguages = ["uk-UA"],
 			DueDate = DateTime.Now + TimeSpan.FromDays(5),
+            ProjectInfoProperties = ["hello", "123"],
+            ProjectInfoValues = ["world", "456"]
 		};
 
 		// Act
