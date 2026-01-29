@@ -23,7 +23,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
         ValidatorHelper.ValidateDateRange(input.DueDateBefore, input.DueDateAfter);
 
         var request = new RestRequest("projects", Method.Get);
-        var result = await Client.ExecuteWithErrorHandling<DataResponse<IEnumerable<ProjectEntity>>>(request);
+        var result = await Client.ExecuteWithErrorHandling<DataListResponse<ProjectEntity>>(request);
 
         var projects = result.Data
             .FilterByDateBefore(input.DueDateBefore, p => p.DueDate)

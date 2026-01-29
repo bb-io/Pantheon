@@ -30,6 +30,7 @@ Before you can connect, make sure you have a welocalize authentication token.
 - **Download target file**. Download a file for a target locale from a specific project. If the project deliverable is a hyperlink, it returns the URL, name and ID without any files.
 - **Search deliverables**. Get a list of deliverable files for a specific project.
 - **Delete file**. Delete a specific file from a project.
+- **Search assets**. Get a list of assets for a specific project.
 
 ### Projects
 
