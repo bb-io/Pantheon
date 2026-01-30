@@ -111,4 +111,39 @@ public class FileActionTests : TestBase
             await action.DownloadTargetFile(project, request)
         );
     }
+
+    [TestMethod]
+    public async Task SearchAssets_WithoutFilters_ReturnsAssets()
+    {
+        // Arrange
+        var actions = new FileActions(InvocationContext, FileManager);
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
+        var input = new SearchAssetsRequest { };
+
+        // Act
+        var result = await actions.SearchAssets(project, input);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task SearchAssets_WithFilters_ReturnsAssets()
+    {
+        // Arrange
+        var actions = new FileActions(InvocationContext, FileManager);
+        var project = new ProjectIdentifier { ProjectId = "3378249999" };
+        var input = new SearchAssetsRequest 
+        { 
+            TargetLanguage = "uk-UA",
+        };
+
+        // Act
+        var result = await actions.SearchAssets(project, input);
+
+        // Assert
+        PrintJsonResult(result);
+        Assert.IsNotNull(result);
+    }
 }

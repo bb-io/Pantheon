@@ -88,7 +88,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         request.AddQueryParameterIfNotEmpty("type", input.Type);
         request.AddQueryParameterIfNotEmpty("targetLocale", input.TargetLocale);
 
-        var result = await Client.ExecuteWithErrorHandling<DataResponse<IEnumerable<DeliverableFileEntity>>>(request);
+        var result = await Client.ExecuteWithErrorHandling<DataListResponse<DeliverableFileEntity>>(request);
         result.Data = result.Data.FilterByStringContains(input.AssetReferenceContains, x => x.AssetReference);
 
         return new(result.Data.ToList());
@@ -106,6 +106,21 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
             throw new PluginApplicationException(
                 $"Failed to delete file {fileId.FileId} from the project {project.ProjectId}: {result.Data}"
             );
+    }
+
+    [Action("Search assets", Description = "Get a list of assets for a specific project")]
+    public async Task<SearchAssetsResponse> SearchAssets(
+        [ActionParameter] ProjectIdentifier project,
+        [ActionParameter] SearchAssetsRequest input)
+    {
+        var request = new RestRequest($"project/{project.ProjectId}/files", Method.Get);
+
+        var result = await Client.ExecuteWithErrorHandling<DataListResponse<AssetEntity>>(request);
+        result.Data = result.Data.FilterByStringContains(input.AssetReferenceContains, x => x.AssetReference);
+        result.Data = result.Data.FilterByStringEquals(input.TargetLanguage, x => x.TargetLanguage);
+        result.Data = result.Data.FilterByStringContains(input.SourceLanguage, x => x.SourceLanguage);
+
+        return new(result.Data.ToList());
     }
 
     private static string? ExtractFilenameFromHeader(string? header)

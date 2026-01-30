@@ -2,5 +2,5 @@
 
 public class DataResponse<T>
 {
-    public T Data { get; set; }
+    public required T Data { get; set; }
 }

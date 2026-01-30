@@ -23,7 +23,7 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
         ValidatorHelper.ValidateDateRange(input.DueDateBefore, input.DueDateAfter);
 
         var request = new RestRequest("projects", Method.Get);
-        var result = await Client.ExecuteWithErrorHandling<DataResponse<IEnumerable<ProjectEntity>>>(request);
+        var result = await Client.ExecuteWithErrorHandling<DataListResponse<ProjectEntity>>(request);
 
         var projects = result.Data
             .FilterByDateBefore(input.DueDateBefore, p => p.DueDate)
@@ -45,15 +45,35 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     [Action("Create project", Description = "Create a new project")]
     public async Task<CreateProjectResponse> CreateProject([ActionParameter] CreateProjectRequest input)
     {
+        input.Validate();
+
         var request = new RestRequest("project", Method.Post);
-        var body = new
+        var body = new Dictionary<string, object?>
         {
-            projectReferenceId = input.ProjectReferenceId,
-            name = input.Name,
-            dueDate = input.DueDate,
-            languages = input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray(),
-            services = input.Services.Select(x => new { id = x }).ToArray()
+            { "projectReferenceId", input.ProjectReferenceId },
+            { "name", input.Name },
+            { "languages", input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray() },
+            { "services", input.Services.Select(x => new { id = x }).ToArray() },
         };
+
+        if (input.DueDate.HasValue)
+            body["dueDate"] = input.DueDate;
+
+        if (input.ProjectInfoProperties != null)
+        {
+            var properties = input.ProjectInfoProperties;
+            var values = input.ProjectInfoValues!;
+
+            var extraProjectInfo = new Dictionary<string, string>();
+            for (int i = 0; i < properties.Count; i++)
+            {
+                string infoProperty = properties[i];
+                string intoValue = values[i];
+                extraProjectInfo[infoProperty] = intoValue;
+            }
+
+            body["extraProjectInfo"] = extraProjectInfo;
+        }
 
         request.WithJsonBody(body, JsonConfig.Settings);
 
