@@ -92,8 +92,6 @@ public class ProjectActionTests : TestBase
 			SourceLanguage = "en-US",
 			TargetLanguages = ["uk-UA", "de-AT"],
 			DueDate = DateTime.Now + TimeSpan.FromDays(5),
-            AnalysisBucketNames = ["LOCKED", "PERFECT"],
-            AnalysisValues = ["LockedUA", "PerfectUA", "LockedDE", "PerfectDE"]
 		};
 
 		// Act

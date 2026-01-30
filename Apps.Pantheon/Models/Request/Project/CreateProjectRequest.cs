@@ -36,12 +36,6 @@ public class CreateProjectRequest
     [Display("Project info values")]
     public List<string>? ProjectInfoValues { get; set; }
 
-    [Display("Analysis bucket names", Description = "List of unique bucket definitions (e.g. '100%', 'New') applicable to all locales")]
-    public List<string>? AnalysisBucketNames { get; set; }
-
-    [Display("Analysis values", Description = "List of values. Order must be: TargetLanguage 1 (all buckets), then TargetLanguage 2 (all buckets), etc")]
-    public List<string>? AnalysisValues { get; set; }
-
     public void Validate()
     {
         if (ProjectInfoProperties?.Count != ProjectInfoValues?.Count)
@@ -50,21 +44,6 @@ public class CreateProjectRequest
                 "The number of 'Project info properties' " +
                 "must match the number of values in the 'Project info values' input"
             );
-        }
-
-        if (AnalysisBucketNames != null || AnalysisValues != null)
-        {
-            var localeCount = TargetLanguages?.Count ?? 0;
-            var bucketCount = AnalysisBucketNames?.Count ?? 0;
-            var valueCount = AnalysisValues?.Count ?? 0;
-
-            if (valueCount != (localeCount * bucketCount))
-            {
-                throw new PluginMisconfigurationException(
-                    $"You have {localeCount} target languages and {bucketCount} analysis buckets. " +
-                    $"This requires exactly {localeCount * bucketCount} values, but you provided {valueCount}."
-                );
-            }
         }
     }
 }

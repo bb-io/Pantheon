@@ -75,34 +75,6 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
             body["extraProjectInfo"] = extraProjectInfo;
         }
 
-        if (input.AnalysisBucketNames != null && input.AnalysisValues != null)
-        {
-            var locales = input.TargetLanguages;
-            var buckets = input.AnalysisBucketNames;
-            var values = input.AnalysisValues;
-
-            var analysisObj = new Dictionary<string, Dictionary<string, object>>();
-            int valueIndex = 0;
-
-            foreach (var locale in locales)
-            {
-                var localeBuckets = new Dictionary<string, object>();
-
-                foreach (var bucket in buckets)
-                {
-                    if (valueIndex >= values.Count) 
-                        break;
-
-                    localeBuckets[bucket] = values[valueIndex];
-                    valueIndex++;
-                }
-
-                analysisObj[locale] = localeBuckets;
-            }
-
-            body["analysis"] = analysisObj;
-        }
-
         request.WithJsonBody(body, JsonConfig.Settings);
 
         var result = await Client.ExecuteWithErrorHandling<DataResponse<CreateProjectResponse>>(request); 
