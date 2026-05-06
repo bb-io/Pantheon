@@ -4,6 +4,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Dictionaries;
+using Blackbird.Applications.Sdk.Common.Files;
 
 namespace Apps.Pantheon.Models.Request.Project;
 
@@ -35,6 +36,9 @@ public class CreateProjectRequest
 
     [Display("Project info values")]
     public List<string>? ProjectInfoValues { get; set; }
+
+    [Display("Analysis JSON data")]
+    public FileReference? ExportedAnalysis { get; set; }
 
     public void Validate()
     {

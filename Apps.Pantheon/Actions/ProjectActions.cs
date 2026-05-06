@@ -10,12 +10,14 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Common.Exceptions;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 
 namespace Apps.Pantheon.Actions;
 
 [ActionList("Projects")]
-public class ProjectActions(InvocationContext invocationContext) : PantheonInvocable(invocationContext)
+public class ProjectActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) 
+    : PantheonInvocable(invocationContext)
 {
     [Action("Search projects", Description = "Search all projects")]
     public async Task<SearchProjectsResponse> SearchProjects([ActionParameter] SearchProjectsRequest input)
@@ -47,6 +49,8 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
     {
         input.Validate();
 
+        var analysisDictionary = await AnalysisFileParser.ParseAnalysis(fileManagementClient, input.ExportedAnalysis);
+        
         var request = new RestRequest("project", Method.Post);
         var body = new Dictionary<string, object?>
         {
@@ -55,6 +59,9 @@ public class ProjectActions(InvocationContext invocationContext) : PantheonInvoc
             { "languages", input.TargetLanguages.Select(x => new { source = input.SourceLanguage, target = x }).ToArray() },
             { "services", input.Services.Select(x => new { id = x }).ToArray() },
         };
+        
+        if (analysisDictionary.Count != 0)
+            body["analysis"] = analysisDictionary;
 
         if (input.DueDate.HasValue)
             body["dueDate"] = input.DueDate;
