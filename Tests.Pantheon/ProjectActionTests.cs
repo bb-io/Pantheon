@@ -84,8 +84,8 @@ public class ProjectActionTests : TestBase
 		// Arrange
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "helloAnalysisData",
-			Name = "Test from tests (analysis1)",
+			ProjectReferenceId = "helloAnalysisData1",
+			Name = "Test from tests (analysis2)",
 			Services = ["13"],
 			SourceLanguage = "en-US",
 			TargetLanguages = ["es-ES"],

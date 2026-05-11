@@ -21,7 +21,7 @@ public static class AnalysisFileParser
         var analysisObjects = JsonConvert.DeserializeObject<List<Analysis>>(jsonString) ?? [];
 
         return analysisObjects.ToDictionary(
-            analysis => analysis.Locale, 
+            analysis => analysis.Locale.Replace('-', '_'), 
             analysis => analysis.RawValues
         );
     }
