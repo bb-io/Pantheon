@@ -84,11 +84,11 @@ public class ProjectActionTests : TestBase
 		// Arrange
 		var request = new CreateProjectRequest
 		{
-			ProjectReferenceId = "helloAnalysisData1",
-			Name = "Test from tests (analysis2)",
+			ProjectReferenceId = "helloAnalysisData2",
+			Name = "Test from tests (analysis3)",
 			Services = ["13"],
-			SourceLanguage = "en-US",
-			TargetLanguages = ["es-ES"],
+			SourceLanguage = "eng-US",
+			TargetLanguages = ["fre-FR", "ger-DE"],
 			ExportedAnalysis = new FileReference { Name = "analysis.json" }
 		};
 
