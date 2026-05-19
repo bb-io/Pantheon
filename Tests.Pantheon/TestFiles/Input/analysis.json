@@ -1,7 +1,275 @@
 [
   {
     "Locale": "de-DE",
-    "OriginalLocale": "ger-DE",
+    "OriginalLocale": "de_de",
+    "NormalizedValues": {
+      "ExactMatch": 6.0,
+      "Repetition": 0.0,
+      "Match9599": 0.0,
+      "Match8594": 0.0,
+      "Match7584": 0.0,
+      "Match5074": 0.0,
+      "NoMatch": 6.0
+    },
+    "RawValues": {
+      "contextMatch": {
+        "segments": 0.0,
+        "words": 0.0,
+        "characters": 0.0,
+        "normalizedPages": 0.0,
+        "percent": 0.0,
+        "editingTime": 0.0
+      },
+      "repetitions": {
+        "segments": 0.0,
+        "words": 0.0,
+        "characters": 0.0,
+        "normalizedPages": 0.0,
+        "percent": 0.0,
+        "editingTime": 0.0
+      },
+      "match100": {
+        "segments": {
+          "sum": 1.0,
+          "tm": 1.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 6.0,
+          "tm": 6.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 20.0,
+          "tm": 20.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.013888888888888888,
+          "tm": 0.013888888888888888,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 50.0,
+          "tm": 50.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match95": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match85": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match75": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match50": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match0": {
+        "segments": {
+          "sum": 1.0,
+          "tm": 1.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 6.0,
+          "tm": 6.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 20.0,
+          "tm": 20.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.013888888888888888,
+          "tm": 0.013888888888888888,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 50.0,
+          "tm": 50.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "total": {
+        "segments": 2.0,
+        "words": 12.0,
+        "characters": 40.0,
+        "normalizedPages": 0.027777777777777776,
+        "percent": 100.0,
+        "editingTime": 0.0
+      },
+      "charsPerWords": 3.3333333333333335
+    }
+  },
+  {
+    "Locale": "fi-FI",
+    "OriginalLocale": "fi_fi",
     "NormalizedValues": {
       "ExactMatch": 0.0,
       "Repetition": 0.0,
@@ -9,39 +277,262 @@
       "Match8594": 0.0,
       "Match7584": 0.0,
       "Match5074": 0.0,
-      "NoMatch": 1.0
+      "NoMatch": 6.0
     },
     "RawValues": {
-      "Total Words": 3.0,
-      "Total Characters": 15.0,
-      "Total Asian characters": 0.0,
-      "Total Tags": 2.0,
-      "Total Reserved1": 0.0,
-      "Total Reserved2": 0.0,
-      "Total Reserved3": 0.0
-    }
-  },
-  {
-    "Locale": "fr-FR",
-    "OriginalLocale": "fre-FR",
-    "NormalizedValues": {
-      "ExactMatch": 1.0,
-      "Repetition": 0.0,
-      "Match9599": 2.0,
-      "Match8594": 0.0,
-      "Match7584": 0.0,
-      "Match5074": 0.0,
-      "NoMatch": 0.0
-    },
-    "RawValues": {
-      "Total Words": 4.0,
-      "Total Characters": 22.0,
-      "Total Asian characters": 0.0,
-      "Total Tags": 4.0,
-      "Total Reserved1": 1.0,
-      "Total Reserved2": 0.0,
-      "Total Reserved3": 0.0
+      "contextMatch": {
+        "segments": 0.0,
+        "words": 0.0,
+        "characters": 0.0,
+        "normalizedPages": 0.0,
+        "percent": 0.0,
+        "editingTime": 0.0
+      },
+      "repetitions": {
+        "segments": 0.0,
+        "words": 0.0,
+        "characters": 0.0,
+        "normalizedPages": 0.0,
+        "percent": 0.0,
+        "editingTime": 0.0
+      },
+      "match100": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match95": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match85": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match75": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match50": {
+        "segments": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "match0": {
+        "segments": {
+          "sum": 1.0,
+          "tm": 1.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "words": {
+          "sum": 6.0,
+          "tm": 6.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "characters": {
+          "sum": 20.0,
+          "tm": 20.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "normalizedPages": {
+          "sum": 0.013888888888888888,
+          "tm": 0.013888888888888888,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "percent": {
+          "sum": 100.0,
+          "tm": 100.0,
+          "mt": 0.0,
+          "nt": 0.0
+        },
+        "editingTime": {
+          "sum": 0.0,
+          "tm": 0.0,
+          "mt": 0.0,
+          "nt": 0.0
+        }
+      },
+      "total": {
+        "segments": 1.0,
+        "words": 6.0,
+        "characters": 20.0,
+        "normalizedPages": 0.013888888888888888,
+        "percent": 100.0,
+        "editingTime": 0.0
+      },
+      "charsPerWords": 3.3333333333333335
     }
   }
 ]
- 
