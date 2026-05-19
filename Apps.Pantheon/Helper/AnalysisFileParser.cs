@@ -2,12 +2,13 @@ using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Filters.Analysis.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Apps.Pantheon.Helper;
 
 public static class AnalysisFileParser
 {
-    public static async Task<Dictionary<string, Dictionary<string, decimal>>> ParseAnalysis(
+    public static async Task<Dictionary<string, JToken>> ParseAnalysis(
         IFileManagementClient fileManagementClient, 
         FileReference? exportedAnalysis)
     {
