@@ -13,6 +13,6 @@ public class PantheonInvocable : BaseInvocable
     protected PantheonClient Client { get; }
     public PantheonInvocable(InvocationContext invocationContext) : base(invocationContext)
     {
-        Client = new(Creds);
+        Client = new(Creds, invocationContext.Logger);
     }
 }

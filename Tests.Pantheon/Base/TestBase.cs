@@ -27,6 +27,11 @@ public class TestBase
         InvocationContext = new InvocationContext
         {
             AuthenticationCredentialsProviders = Creds,
+            Logger = new Logger("Error")
+            {
+                LogError = (message, parameters) =>
+                    Console.WriteLine($"[LogError] {message} | {string.Join(" | ", parameters)}"),
+            },
         };
 
         FileManager = new FileManager();
