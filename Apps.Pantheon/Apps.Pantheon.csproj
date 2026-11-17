@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>welocalize</Product>
         <Description>The welocalize API helps you submit translation jobs, track them and retrieve the finished files.</Description>
-        <Version>1.0.10</Version>
+        <Version>1.0.11</Version>
         <AssemblyName>Apps.Pantheon</AssemblyName>
     </PropertyGroup>
 
@@ -20,4 +20,7 @@
         <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
+    </ItemGroup>
 </Project>
